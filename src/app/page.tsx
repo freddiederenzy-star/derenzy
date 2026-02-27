@@ -59,6 +59,8 @@ const timeSlots = [
 
 export default function Home() {
   const [step, setStep] = useState(1);
+  const [showPayment, setShowPayment] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [booking, setBooking] = useState<Booking>({
     service: null,
     date: "",
@@ -80,8 +82,19 @@ export default function Home() {
 
   const handleDetailsSubmit = (name: string, phone: string, carModel: string) => {
     setBooking({ ...booking, name, phone, carModel });
-    setBookingComplete(true);
+    setShowPayment(true);
     setStep(4);
+  };
+
+  const handlePayment = () => {
+    setIsProcessing(true);
+    // Simulate payment processing
+    setTimeout(() => {
+      setIsProcessing(false);
+      setShowPayment(false);
+      setBookingComplete(true);
+      setStep(5);
+    }, 2000);
   };
 
   const handleBack = () => {
@@ -132,7 +145,7 @@ export default function Home() {
       <div className="bg-white border-b border-blue-100">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-center gap-2 sm:gap-4">
-            {[1, 2, 3].map((s) => (
+            {[1, 2, 3, 4].map((s) => (
               <div key={s} className="flex items-center">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
@@ -148,9 +161,9 @@ export default function Home() {
                     step >= s ? "text-blue-600" : "text-gray-400"
                   }`}
                 >
-                  {s === 1 ? "Service" : s === 2 ? "Dato & Tid" : "Oplysninger"}
+                  {s === 1 ? "Service" : s === 2 ? "Dato & Tid" : s === 3 ? "Oplysninger" : "Betaling"}
                 </span>
-                {s < 3 && (
+                {s < 4 && (
                   <div
                     className={`w-8 sm:w-16 h-0.5 mx-2 ${
                       step > s ? "bg-blue-500" : "bg-gray-200"
@@ -361,8 +374,99 @@ export default function Home() {
           </div>
         )}
 
-        {/* Step 4: Confirmation */}
-        {step === 4 && bookingComplete && (
+        {/* Step 4: Payment */}
+        {step === 4 && showPayment && (
+          <div className="animate-fadeIn">
+            <button
+              onClick={handleBack}
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Tilbage
+            </button>
+
+            <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+              Betaling
+            </h2>
+            <p className="text-gray-600 text-center mb-8">
+              Vælg din foretrukne betalingsmetode
+            </p>
+
+            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4">
+              {/* Order Summary */}
+              <div className="bg-blue-50 rounded-xl p-4 mb-6">
+                <h3 className="font-semibold text-gray-900 mb-3">Ordreoversigt</h3>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Service</span>
+                  <span className="font-semibold">{booking.service?.name}</span>
+                </div>
+                <div className="flex justify-between text-sm mt-2">
+                  <span className="text-gray-600">Dato</span>
+                  <span className="font-semibold">{booking.date} kl. {booking.time}</span>
+                </div>
+                <div className="border-t border-blue-200 mt-3 pt-3 flex justify-between items-center">
+                  <span className="font-semibold text-gray-900">Total at betale</span>
+                  <span className="text-2xl font-bold text-blue-600">{booking.service?.price} kr.</span>
+                </div>
+              </div>
+
+              {/* Payment Methods */}
+              <button
+                onClick={handlePayment}
+                disabled={isProcessing}
+                className="w-full bg-gradient-to-r from-green-500 to-green-400 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+              >
+                {isProcessing ? (
+                  <>
+                    <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Behandler...
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                    Betal med Dankort / Visa
+                  </>
+                )}
+              </button>
+
+              <button
+                onClick={handlePayment}
+                disabled={isProcessing}
+                className="w-full bg-gray-100 text-gray-700 py-4 rounded-xl font-semibold text-lg hover:bg-gray-200 transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                MobilPay
+              </button>
+
+              <button
+                onClick={handlePayment}
+                disabled={isProcessing}
+                className="w-full bg-gray-100 text-gray-700 py-4 rounded-xl font-semibold text-lg hover:bg-gray-200 transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                Bankoverførsel
+              </button>
+
+              <p className="text-xs text-gray-500 text-center mt-4">
+                🔒 Din betaling er sikker og krypteret
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Step 5: Confirmation */}
+        {step === 5 && bookingComplete && (
           <div className="animate-fadeIn text-center">
             <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
