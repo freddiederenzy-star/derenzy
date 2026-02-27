@@ -117,11 +117,12 @@ export default function Home() {
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">SparkleWash</h1>
                 <p className="text-sm text-gray-500">Professional Car Care</p>
+                <p className="text-xs text-blue-600 font-medium mt-1">Only wash car inside</p>
               </div>
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <span className="hidden sm:inline">📞</span>
-              <span className="hidden sm:inline">+1 (555) 123-4567</span>
+              <span className="hidden sm:inline">+45 60 62 70 57</span>
             </div>
           </div>
         </div>
@@ -317,7 +318,7 @@ export default function Home() {
                   type="tel"
                   name="phone"
                   required
-                  placeholder="+1 (555) 123-4567"
+                  placeholder="+45 60 62 70 57"
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 />
               </div>
