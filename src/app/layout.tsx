@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Template",
-  description: "A minimal Next.js starter template",
+  title: "SparkleWash - Book Your Car Wash",
+  description: "Book your car wash appointment online. Choose from Basic, Standard, Premium, or Express wash services.",
 };
 
 export default function RootLayout({
