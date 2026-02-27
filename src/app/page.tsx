@@ -181,27 +181,22 @@ export default function Home() {
             <p className="text-gray-600 text-center mb-8">
               Vælg den service der bedst passer til dine behov
             </p>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="space-y-3">
               {services.map((service) => (
                 <button
                   key={service.id}
                   onClick={() => handleServiceSelect(service)}
-                  className="group bg-white rounded-2xl p-6 text-left border-2 border-gray-100 hover:border-blue-300 hover:shadow-lg transition-all duration-300"
+                  className="w-full bg-white rounded-xl p-4 text-left border border-gray-200 hover:border-blue-400 hover:shadow-md transition-all flex justify-between items-center"
                 >
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">
                       {service.name}
                     </h3>
-                    <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
-                      {service.price} kr.
-                    </span>
+                    <p className="text-gray-600 text-sm">{service.description}</p>
                   </div>
-                  <p className="text-gray-600 text-sm mb-4">{service.description}</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{service.duration} minutter</span>
+                  <div className="text-right">
+                    <span className="text-xl font-bold text-blue-600">{service.price} kr.</span>
+                    <p className="text-xs text-gray-500">{service.duration} min</p>
                   </div>
                 </button>
               ))}
