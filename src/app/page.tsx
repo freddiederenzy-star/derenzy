@@ -16,7 +16,6 @@ type Booking = {
   time: string;
   name: string;
   phone: string;
-  carModel: string;
   address: string;
 };
 
@@ -60,13 +59,13 @@ const timeSlots = [
 
 export default function Home() {
   const [step, setStep] = useState(1);
+  const [addressError, setAddressError] = useState("");
   const [booking, setBooking] = useState<Booking>({
     service: null,
     date: "",
     time: "",
     name: "",
     phone: "",
-    carModel: "",
     address: "",
   });
   const [bookingComplete, setBookingComplete] = useState(false);
@@ -80,8 +79,15 @@ export default function Home() {
     setBooking({ ...booking, date, time });
   };
 
-  const handleDetailsSubmit = (name: string, phone: string, carModel: string, address: string) => {
-    setBooking({ ...booking, name, phone, carModel, address });
+  const handleDetailsSubmit = (name: string, phone: string, address: string) => {
+    // Validate address - must be in Charlottenlund (2920)
+    const addressLower = address.toLowerCase();
+    if (!addressLower.includes("2920") && !addressLower.includes("charlottenlund")) {
+      setAddressError("Vi betjener kun Charlottenlund (2920). Ang venligst en adresse i dette område.");
+      return;
+    }
+    setAddressError("");
+    setBooking({ ...booking, name, phone, address });
     setBookingComplete(true);
     setStep(4);
   };
@@ -98,7 +104,6 @@ export default function Home() {
       time: "",
       name: "",
       phone: "",
-      carModel: "",
       address: "",
     });
     setBookingComplete(false);
@@ -295,7 +300,6 @@ export default function Home() {
                 handleDetailsSubmit(
                   formData.get("name") as string,
                   formData.get("phone") as string,
-                  formData.get("carModel") as string,
                   formData.get("address") as string
                 );
               }}
@@ -329,29 +333,23 @@ export default function Home() {
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  🚗 Bil Model
-                </label>
-                <input
-                  type="text"
-                  name="carModel"
-                  required
-                  placeholder="f.eks., Toyota Camry 2020"
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   📍 Adresse (hvor bilen holder)
                 </label>
                 <input
                   type="text"
                   name="address"
                   required
-                  placeholder="f.eks., Hovedgaden 12, 2800 Lyngby"
+                  placeholder="f.eks., Hovedgaden 12, 2920 Charlottenlund"
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 />
+                <p className="text-xs text-gray-500 mt-1">Vi betjener kun Charlottenlund (2920)</p>
               </div>
+
+              {addressError && (
+                <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                  <p className="text-red-600 text-sm font-medium">{addressError}</p>
+                </div>
+              )}
 
               <div className="bg-blue-50 rounded-xl p-4 mt-6">
                 <div className="flex justify-between items-center text-sm">
@@ -407,10 +405,6 @@ export default function Home() {
                 <div className="flex justify-between py-3 border-b border-gray-100">
                   <span className="text-gray-600">Tid</span>
                   <span className="font-semibold">{booking.time}</span>
-                </div>
-                <div className="flex justify-between py-3 border-b border-gray-100">
-                  <span className="text-gray-600">Bil</span>
-                  <span className="font-semibold">{booking.carModel}</span>
                 </div>
                 <div className="flex justify-between py-3 border-b border-gray-100">
                   <span className="text-gray-600">Adresse</span>
