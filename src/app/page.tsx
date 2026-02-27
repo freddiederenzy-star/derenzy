@@ -22,29 +22,29 @@ type Booking = {
 const services: Service[] = [
   {
     id: "basic",
-    name: "Basic Wash",
-    description: "Exterior wash with soap and water, tire cleaning",
+    name: "Basis Vask",
+    description: "Udvendig vask med sæbe og vand, dæk rengøring",
     price: 25,
     duration: 20,
   },
   {
     id: "standard",
-    name: "Standard Wash",
-    description: "Full exterior wash, interior vacuum, window cleaning",
+    name: "Standard Vask",
+    description: "Fuld udvendig vask, støvsugning, vinduespudsning",
     price: 45,
     duration: 40,
   },
   {
     id: "premium",
-    name: "Premium Detail",
-    description: "Full exterior & interior detail, wax, polish, leather treatment",
+    name: "Premium Detalje",
+    description: "Fuld udvendig & indvendig detalje, voks, polering, læderbehandling",
     price: 85,
     duration: 90,
   },
   {
     id: "express",
-    name: "Express Wash",
-    description: "Quick exterior wash - perfect for regular maintenance",
+    name: "Express Vask",
+    description: "Hurtig udvendig vask - perfekt til regelmæssig vedligeholdelse",
     price: 15,
     duration: 10,
   },
@@ -116,8 +116,8 @@ export default function Home() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">SparkleWash</h1>
-                <p className="text-sm text-gray-500">Professional Car Care</p>
-                <p className="text-xs text-blue-600 font-medium mt-1">Only wash car inside</p>
+                <p className="text-sm text-gray-500">Professionel Bilpleje</p>
+                <p className="text-xs text-blue-600 font-medium mt-1">Kun støvsugning og vask af bilens indvendige</p>
               </div>
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -148,7 +148,7 @@ export default function Home() {
                     step >= s ? "text-blue-600" : "text-gray-400"
                   }`}
                 >
-                  {s === 1 ? "Service" : s === 2 ? "Date & Time" : "Details"}
+                  {s === 1 ? "Service" : s === 2 ? "Dato & Tid" : "Oplysninger"}
                 </span>
                 {s < 3 && (
                   <div
@@ -168,10 +168,10 @@ export default function Home() {
         {step === 1 && (
           <div className="animate-fadeIn">
             <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-              Choose Your Wash
+              Vælg Din Vask
             </h2>
             <p className="text-gray-600 text-center mb-8">
-              Select the service that best fits your needs
+              Vælg den service der bedst passer til dine behov
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
               {services.map((service) => (
@@ -185,7 +185,7 @@ export default function Home() {
                       {service.name}
                     </h3>
                     <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
-                      ${service.price}
+                      {service.price} kr.
                     </span>
                   </div>
                   <p className="text-gray-600 text-sm mb-4">{service.description}</p>
@@ -193,7 +193,7 @@ export default function Home() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>{service.duration} minutes</span>
+                    <span>{service.duration} minutter</span>
                   </div>
                 </button>
               ))}
@@ -211,20 +211,20 @@ export default function Home() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              Back
+              Tilbage
             </button>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-              Pick Your Time
+              Vælg Din Tid
             </h2>
             <p className="text-gray-600 text-center mb-8">
-              Selected: <span className="font-semibold text-blue-600">{booking.service?.name}</span> - ${booking.service?.price}
+              Valgt: <span className="font-semibold text-blue-600">{booking.service?.name}</span> - {booking.service?.price} kr.
             </p>
 
             {/* Date Picker */}
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
               <label className="block text-sm font-semibold text-gray-700 mb-3">
-                📅 Select Date
+                📅 Vælg Dato
               </label>
               <input
                 type="date"
@@ -239,7 +239,7 @@ export default function Home() {
             {booking.date && (
               <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm animate-fadeIn">
                 <label className="block text-sm font-semibold text-gray-700 mb-3">
-                  ⏰ Select Time
+                  ⏰ Vælg Tid
                 </label>
                 <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
                   {timeSlots.map((time) => (
@@ -274,14 +274,14 @@ export default function Home() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              Back
+              Tilbage
             </button>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-              Your Details
+              Dine Oplysninger
             </h2>
             <p className="text-gray-600 text-center mb-8">
-              {booking.service?.name} • {booking.date} at {booking.time}
+              {booking.service?.name} • {booking.date} kl. {booking.time}
             </p>
 
             <form
@@ -299,20 +299,20 @@ export default function Home() {
             >
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  👤 Full Name
+                  👤 Fuldt Navn
                 </label>
                 <input
                   type="text"
                   name="name"
                   required
-                  placeholder="John Smith"
+                  placeholder="F eks. Anders And"
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  📱 Phone Number
+                  📱 Telefonnummer
                 </label>
                 <input
                   type="tel"
@@ -325,13 +325,13 @@ export default function Home() {
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  🚗 Car Model
+                  🚗 Bil Model
                 </label>
                 <input
                   type="text"
                   name="carModel"
                   required
-                  placeholder="e.g., Toyota Camry 2020"
+                  placeholder="f.eks., Toyota Camry 2020"
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 />
               </div>
@@ -342,12 +342,12 @@ export default function Home() {
                   <span className="font-semibold">{booking.service?.name}</span>
                 </div>
                 <div className="flex justify-between items-center text-sm mt-2">
-                  <span className="text-gray-600">Duration</span>
+                  <span className="text-gray-600">Varighed</span>
                   <span className="font-semibold">{booking.service?.duration} min</span>
                 </div>
                 <div className="border-t border-blue-200 mt-3 pt-3 flex justify-between items-center">
                   <span className="font-semibold text-gray-900">Total</span>
-                  <span className="text-2xl font-bold text-blue-600">${booking.service?.price}</span>
+                  <span className="text-2xl font-bold text-blue-600">{booking.service?.price} kr.</span>
                 </div>
               </div>
 
@@ -355,7 +355,7 @@ export default function Home() {
                 type="submit"
                 className="w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:scale-[1.02] transition-all"
               >
-                ✓ Confirm Booking
+                ✓ Bekræft Booking
               </button>
             </form>
           </div>
@@ -371,10 +371,10 @@ export default function Home() {
             </div>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Booking Confirmed! 🎉
+              Booking Bekræftet! 🎉
             </h2>
             <p className="text-gray-600 mb-8">
-              We&apos;re looking forward to seeing you!
+              Vi glæder os til at se dig!
             </p>
 
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm max-w-md mx-auto mb-8">
@@ -384,33 +384,33 @@ export default function Home() {
                   <span className="font-semibold">{booking.service?.name}</span>
                 </div>
                 <div className="flex justify-between py-3 border-b border-gray-100">
-                  <span className="text-gray-600">Date</span>
+                  <span className="text-gray-600">Dato</span>
                   <span className="font-semibold">{booking.date}</span>
                 </div>
                 <div className="flex justify-between py-3 border-b border-gray-100">
-                  <span className="text-gray-600">Time</span>
+                  <span className="text-gray-600">Tid</span>
                   <span className="font-semibold">{booking.time}</span>
                 </div>
                 <div className="flex justify-between py-3 border-b border-gray-100">
-                  <span className="text-gray-600">Car</span>
+                  <span className="text-gray-600">Bil</span>
                   <span className="font-semibold">{booking.carModel}</span>
                 </div>
                 <div className="flex justify-between py-3">
                   <span className="text-gray-600">Total</span>
-                  <span className="font-bold text-blue-600 text-xl">${booking.service?.price}</span>
+                  <span className="font-bold text-blue-600 text-xl">{booking.service?.price} kr.</span>
                 </div>
               </div>
             </div>
 
             <p className="text-gray-600 text-sm mb-6">
-              A confirmation has been sent to <span className="font-semibold">{booking.phone}</span>
+              En bekræftelse er sendt til <span className="font-semibold">{booking.phone}</span>
             </p>
 
             <button
               onClick={handleReset}
               className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all"
             >
-              Book Another Wash
+              Book En Ny Vask
             </button>
           </div>
         )}
@@ -419,7 +419,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-8 mt-12">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-sm">© 2026 SparkleWash. All rights reserved.</p>
+          <p className="text-sm">© 2026 SparkleWash. Alle rettigheder forbeholdes.</p>
           <p className="text-xs mt-2">123 Clean Street, Car City, CC 12345</p>
         </div>
       </footer>
