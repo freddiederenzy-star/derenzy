@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SparkleWash - Book Your Car Wash",
-  description: "Book your car wash appointment online. Choose from Basic, Standard, Premium, or Express wash services.",
+  title: "carwash.com - Book Your Car Wash",
+  description: "Book your car wash appointment online. Professional interior cleaning services in Charlottenlund.",
 };
 
 export default function RootLayout({

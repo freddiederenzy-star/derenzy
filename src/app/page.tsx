@@ -103,7 +103,7 @@ export default function Home() {
                 </svg>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">SparkleWash</h1>
+                <h1 className="text-2xl font-bold text-gray-900">carwash.com</h1>
                 <p className="text-sm text-gray-500">Professionel Bilpleje</p>
                 <p className="text-xs text-blue-600 font-medium mt-1">Kun støvsugning og vask af bilens indvendige</p>
               </div>
@@ -416,7 +416,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-8 mt-12">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-sm">© 2026 SparkleWash. Alle rettigheder forbeholdes.</p>
+          <p className="text-sm">© 2026 carwash.com. Alle rettigheder forbeholdes.</p>
           <p className="text-xs mt-2">123 Clean Street, Car City, CC 12345</p>
         </div>
       </footer>
