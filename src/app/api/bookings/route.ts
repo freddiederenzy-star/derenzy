@@ -1,17 +1,6 @@
 import { NextResponse } from "next/server";
-
-// In-memory storage for bookings (in production, use a database)
-const bookings: Array<{
-  id: string;
-  service: string;
-  date: string;
-  time: string;
-  name: string;
-  phone: string;
-  address: string;
-  price: number;
-  createdAt: string;
-}> = [];
+import { bookings } from "@/lib/bookings";
+import { sendBookingNotificationToAdmin, sendConfirmationToCustomer } from "@/lib/sms";
 
 export async function POST(request: Request) {
   try {
@@ -37,6 +26,7 @@ export async function POST(request: Request) {
       address,
       price,
       createdAt: new Date().toISOString(),
+      reminderSent: false,
     };
 
     bookings.push(booking);
@@ -51,6 +41,26 @@ export async function POST(request: Request) {
     console.log(`Service: ${service}`);
     console.log(`Pris: ${price} kr.`);
     console.log("==================");
+
+    // Send SMS notifications (async - don't wait for them)
+    // Send to admin
+    sendBookingNotificationToAdmin({
+      name,
+      phone,
+      address,
+      date,
+      time,
+      service,
+      price,
+    });
+
+    // Send confirmation to customer
+    sendConfirmationToCustomer(phone, {
+      date,
+      time,
+      service,
+      address,
+    });
 
     return NextResponse.json({ 
       success: true, 
