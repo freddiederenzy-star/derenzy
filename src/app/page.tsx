@@ -80,7 +80,7 @@ export default function Home() {
     return day === 5 || day === 6; // Saturday = 5, Sunday = 6
   };
 
-  const handleDetailsSubmit = (name: string, phone: string, address: string) => {
+  const handleDetailsSubmit = async (name: string, phone: string, address: string) => {
     // Smart address validation - detect if address is in Charlottenlund area
     const addressLower = address.toLowerCase();
     
@@ -130,6 +130,36 @@ export default function Home() {
     }
     
     setAddressError("");
+    
+    // Save booking to API
+    try {
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service: booking.service?.name,
+          date: booking.date,
+          time: booking.time,
+          name,
+          phone,
+          address,
+          price: booking.service?.price
+        })
+      });
+      
+      const result = await response.json();
+      
+      if (!response.ok) {
+        alert(result.error || "Der opstod en fejl. Prøv igen.");
+        return;
+      }
+      
+      console.log("Booking gemt!", result);
+    } catch (error) {
+      console.error("Booking error:", error);
+      // Continue anyway - booking will still show on confirmation
+    }
+    
     setBooking({ ...booking, name, phone, address });
     setBookingComplete(true);
     setStep(4);
@@ -175,6 +205,13 @@ export default function Home() {
               <span className="hidden sm:inline">📞</span>
               <span className="hidden sm:inline">+45 60 62 70 57</span>
             </div>
+            <a 
+              href="/admin" 
+              className="text-xs text-gray-400 hover:text-blue-600 transition-colors"
+              title="Admin"
+            >
+              ⚙️
+            </a>
           </div>
         </div>
       </header>
