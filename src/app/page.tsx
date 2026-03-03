@@ -414,7 +414,7 @@ export default function Home() {
 
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 max-w-md mx-auto mb-6">
               <p className="text-yellow-800 font-medium">
-                💰 Betaling sker på stedet efter rengøringen er udført
+                💰 Betaling: 100 kr for 1 time - betales på stedet efter rengøringen er udført
               </p>
             </div>
 
