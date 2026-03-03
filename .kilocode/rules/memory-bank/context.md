@@ -18,12 +18,17 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] Recipe system for common features
 - [x] **Car Wash Booking Website** - Full booking flow with service selection, date/time picker, customer details, and confirmation page
 - [x] **Time Slot Booking System** - Blue/gray time slots showing availability, Saturday-Sunday only (9-16)
+- [x] **Smart Address Validation** - Automatically recognizes Charlottenlund addresses based on street names
+- [x] **Admin Dashboard** - View all bookings at /admin with name, phone, address, date, time
+- [x] **Booking API** - POST /api/bookings saves bookings, GET /api/bookings returns all bookings
 
 ## Current Structure
 
 | File/Directory | Purpose | Status |
 |----------------|---------|--------|
 | `src/app/page.tsx` | Home page with booking flow | ✅ Complete |
+| `src/app/admin/page.tsx` | Admin dashboard to view all bookings | ✅ Complete |
+| `src/app/api/bookings/route.ts` | API endpoint for saving/retrieving bookings | ✅ Complete |
 | `src/app/layout.tsx` | Root layout + metadata | ✅ Ready |
 | `src/app/globals.css` | Global styles + animations | ✅ Ready |
 | `.kilocode/` | AI context & recipes | ✅ Ready |
@@ -37,12 +42,14 @@ Completed: Full car wash booking website with:
 - Only Saturday and Sunday available (9:00 - 16:00)
 - Customer information form (name, phone, address in Charlottenlund)
 - Booking confirmation with payment after service
+- Smart address validation (recognizes Charlottenlund street names)
+- Admin page at /admin to view all bookings
+- API endpoint at /api/bookings
 
 Next steps depend on user requirements:
-1. Add database persistence (use add-database recipe)
+1. Add database persistence (use add-database recipe) - needed to persist bookings between server restarts
 2. Add email/SMS notifications
-3. Add admin dashboard
-4. Add authentication
+3. Add authentication to admin page
 
 ## Quick Start Guide
 
@@ -99,3 +106,5 @@ export async function GET() {
 | Initial | Template created with base setup |
 | 2026-02-27 | Added car wash booking website with full booking flow |
 | 2026-03-03 | Added time slot booking with Saturday-Sunday restriction and booked slot display |
+| 2026-03-03 | Added smart address validation for Charlottenlund |
+| 2026-03-03 | Added admin page (/admin) to view all bookings + booking API |
