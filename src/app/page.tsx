@@ -21,32 +21,11 @@ type Booking = {
 
 const services: Service[] = [
   {
-    id: "basic",
-    name: "Basis Vask",
-    description: "Udvendig vask med sæbe og vand, dæk rengøring",
-    price: 25,
-    duration: 20,
-  },
-  {
-    id: "standard",
-    name: "Standard Vask",
-    description: "Fuld udvendig vask, støvsugning, vinduespudsning",
-    price: 45,
-    duration: 40,
-  },
-  {
-    id: "premium",
-    name: "Premium Detalje",
-    description: "Fuld udvendig & indvendig detalje, voks, polering, læderbehandling",
-    price: 85,
-    duration: 90,
-  },
-  {
-    id: "express",
-    name: "Express Vask",
-    description: "Hurtig udvendig vask - perfekt til regelmæssig vedligeholdelse",
-    price: 15,
-    duration: 10,
+    id: "interior",
+    name: "Indvendig Rengøring",
+    description: "Støvsugning og vask af bilens indvendige - sæder, gulvmåtter, instrumentpanel og ruder",
+    price: 100,
+    duration: 60,
   },
 ];
 
@@ -77,6 +56,7 @@ export default function Home() {
 
   const handleDateTimeSelect = (date: string, time: string) => {
     setBooking({ ...booking, date, time });
+    setStep(3);
   };
 
   const handleDetailsSubmit = (name: string, phone: string, address: string) => {
@@ -156,7 +136,7 @@ export default function Home() {
                     step >= s ? "text-blue-600" : "text-gray-400"
                   }`}
                 >
-                  {s === 1 ? "Service" : s === 2 ? "Dato & Tid" : "Oplysninger"}
+                  {s === 1 ? "Tid" : s === 2 ? "Oplysninger" : "Bekræftelse"}
                 </span>
                 {s < 3 && (
                   <div
@@ -176,30 +156,31 @@ export default function Home() {
         {step === 1 && (
           <div className="animate-fadeIn">
             <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-              Vælg Din Vask
+              Bestil Indvendig Rengøring
             </h2>
             <p className="text-gray-600 text-center mb-8">
-              Vælg den service der bedst passer til dine behov
+              Støvsugning og vask af bilens indvendige
             </p>
-            <div className="space-y-3">
-              {services.map((service) => (
-                <button
-                  key={service.id}
-                  onClick={() => handleServiceSelect(service)}
-                  className="w-full bg-white rounded-xl p-4 text-left border border-gray-200 hover:border-blue-400 hover:shadow-md transition-all flex justify-between items-center"
-                >
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900">
-                      {service.name}
-                    </h3>
-                    <p className="text-gray-600 text-sm">{service.description}</p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-xl font-bold text-blue-600">{service.price} kr.</span>
-                    <p className="text-xs text-gray-500">{service.duration} min</p>
-                  </div>
-                </button>
-              ))}
+            
+            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
+              <div className="flex justify-between items-center mb-4">
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900">
+                    {services[0].name}
+                  </h3>
+                  <p className="text-gray-600 text-sm">{services[0].description}</p>
+                </div>
+                <div className="text-right">
+                  <span className="text-xl font-bold text-blue-600">{services[0].price} kr.</span>
+                  <p className="text-xs text-gray-500">{services[0].duration} min</p>
+                </div>
+              </div>
+              <button
+                onClick={() => handleServiceSelect(services[0])}
+                className="w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:scale-[1.02] transition-all"
+              >
+                Vælg Tidspunkt
+              </button>
             </div>
           </div>
         )}
@@ -221,7 +202,7 @@ export default function Home() {
               Vælg Din Tid
             </h2>
             <p className="text-gray-600 text-center mb-8">
-              Valgt: <span className="font-semibold text-blue-600">{booking.service?.name}</span> - {booking.service?.price} kr.
+              Vælg en tid til din indvendige rengøring
             </p>
 
             {/* Date Picker */}
