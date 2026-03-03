@@ -17,6 +17,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] Memory bank documentation
 - [x] Recipe system for common features
 - [x] **Car Wash Booking Website** - Full booking flow with service selection, date/time picker, customer details, and confirmation page
+- [x] **Time Slot Booking System** - Blue/gray time slots showing availability, Saturday-Sunday only (9-16)
 
 ## Current Structure
 
@@ -30,10 +31,12 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 ## Current Focus
 
 Completed: Full car wash booking website with:
-- Service selection (Basic, Standard, Premium, Express washes)
+- Service selection (Indvendig Rengøring)
 - Date and time slot selection
-- Customer information form (name, phone, car model)
-- Booking confirmation with summary
+- Time slots: Blue = available, Gray/strikethrough = booked
+- Only Saturday and Sunday available (9:00 - 16:00)
+- Customer information form (name, phone, address in Charlottenlund)
+- Booking confirmation with payment after service
 
 Next steps depend on user requirements:
 1. Add database persistence (use add-database recipe)
@@ -95,3 +98,4 @@ export async function GET() {
 |------|---------|
 | Initial | Template created with base setup |
 | 2026-02-27 | Added car wash booking website with full booking flow |
+| 2026-03-03 | Added time slot booking with Saturday-Sunday restriction and booked slot display |
