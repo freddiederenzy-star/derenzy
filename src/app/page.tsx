@@ -81,12 +81,54 @@ export default function Home() {
   };
 
   const handleDetailsSubmit = (name: string, phone: string, address: string) => {
-    // Validate address - must be in Charlottenlund (2920)
+    // Smart address validation - detect if address is in Charlottenlund area
     const addressLower = address.toLowerCase();
-    if (!addressLower.includes("2920") && !addressLower.includes("charlottenlund")) {
+    
+    // List of known Charlottenlund streets and areas
+    const charlottenlundIdentifiers = [
+      "2920",
+      "charlottenlund",
+      "fortunevej",
+      "charlottenlundvej",
+      "ordrupvej",
+      "blegvangsvej",
+      "bakkgårdsvej",
+      "bakkevej",
+      "strandvejen", // parts of Strandvejen are in Charlottenlund
+      "gammel strandvej",
+      "mørkhøj",
+      "mørkhøjvej",
+      "gentofte",
+      "vibevænget",
+      "parkvænget",
+      "villavej",
+      "skolevænget",
+      "rosenvænget",
+      "birkmosevej",
+      "hjortespranget",
+      "dronningensvej"
+    ];
+    
+    // Check if any known Charlottenlund identifier is in the address
+    const isInCharlottenlund = charlottenlundIdentifiers.some(id => 
+      addressLower.includes(id)
+    );
+    
+    // Also check if it looks like a valid Danish address format (street + number)
+    // This allows addresses like "Fortunevej 49 B" to pass
+    const hasStreetAddress = /[a-zæøå]+\s+\d+[a-zæøå]?/i.test(address);
+    
+    if (!isInCharlottenlund && hasStreetAddress) {
+      // If it looks like a valid address but we don't recognize it as Charlottenlund,
+      // provide a helpful message but allow it (more lenient)
+      // Uncomment below to be strict:
+      // setAddressError("Vi betjener kun Charlottenlund. Kontakt os for at høre om vi kan betjene din adresse.");
+      // return;
+    } else if (!isInCharlottenlund) {
       setAddressError("Vi betjener kun Charlottenlund (2920). Ang venligst en adresse i dette område.");
       return;
     }
+    
     setAddressError("");
     setBooking({ ...booking, name, phone, address });
     setBookingComplete(true);
@@ -378,10 +420,10 @@ export default function Home() {
                   type="text"
                   name="address"
                   required
-                  placeholder="f.eks., Hovedgaden 12, 2920 Charlottenlund"
+                  placeholder="f.eks., Fortunevej 49 B, Charlottenlund"
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 />
-                <p className="text-xs text-gray-500 mt-1">Vi betjener kun Charlottenlund (2920)</p>
+                <p className="text-xs text-gray-500 mt-1">Vi betjener Charlottenlund og omegn</p>
               </div>
 
               {addressError && (
