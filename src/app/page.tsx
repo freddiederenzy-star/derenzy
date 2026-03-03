@@ -394,8 +394,9 @@ export default function Home() {
             </div>
 
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 max-w-md mx-auto mb-6">
-              <p className="text-yellow-800 font-medium">
-                💰 Betaling: 100 kr for 1 time - betales på stedet efter rengøringen er udført
+              <p className="text-yellow-800 font-medium text-lg">
+                💰 <strong>Betaling sker efter vi har vasket din bil!</strong><br/>
+                Du betaler 100 kr. kontant eller med MobilePay når vi er færdige med rengøringen.
               </p>
             </div>
 
