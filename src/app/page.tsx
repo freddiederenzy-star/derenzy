@@ -30,10 +30,19 @@ const services: Service[] = [
 ];
 
 const timeSlots = [
-  "08:00", "08:30", "09:00", "09:30", "10:00", "10:30",
+  "09:00", "09:30", "10:00", "10:30",
   "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
-  "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
-  "17:00", "17:30",
+  "14:00", "14:30", "15:00", "15:30", "16:00",
+];
+
+// Simulated booked slots - in production this would come from a database
+// Format: "date-time" e.g., "2026-03-07-09:00"
+const bookedSlots: string[] = [
+  "2026-03-07-10:00",
+  "2026-03-07-14:00",
+  "2026-03-08-09:30",
+  "2026-03-08-11:00",
+  "2026-03-08-15:00",
 ];
 
 export default function Home() {
@@ -57,6 +66,18 @@ export default function Home() {
   const handleDateTimeSelect = (date: string, time: string) => {
     setBooking({ ...booking, date, time });
     setStep(3);
+  };
+
+  // Check if a time slot is booked
+  const isSlotBooked = (date: string, time: string): boolean => {
+    return bookedSlots.includes(`${date}-${time}`);
+  };
+
+  // Check if selected date is Saturday (5) or Sunday (6)
+  const isValidWeekend = (date: string): boolean => {
+    if (!date) return false;
+    const day = new Date(date).getDay();
+    return day === 5 || day === 6; // Saturday = 5, Sunday = 6
   };
 
   const handleDetailsSubmit = (name: string, phone: string, address: string) => {
@@ -208,41 +229,83 @@ export default function Home() {
             {/* Date Picker */}
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
               <label className="block text-sm font-semibold text-gray-700 mb-3">
-                📅 Vælg Dato
+                📅 Vælg Dato (Lørdag eller Søndag)
               </label>
               <input
                 type="date"
                 min={new Date().toISOString().split("T")[0]}
                 value={booking.date}
-                onChange={(e) => handleDateTimeSelect(e.target.value, booking.time)}
+                onChange={(e) => {
+                  const selectedDate = e.target.value;
+                  const day = selectedDate ? new Date(selectedDate).getDay() : -1;
+                  
+                  // Only allow Saturday (5) or Sunday (6)
+                  if (day !== 5 && day !== 6 && selectedDate) {
+                    alert("Vi booker kun tid på lørdage og søndage. Vælg venligst en weekenddag.");
+                    return;
+                  }
+                  
+                  setBooking({ ...booking, date: selectedDate, time: "" });
+                }}
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
               />
+              {booking.date && !isValidWeekend(booking.date) && (
+                <p className="text-red-500 text-sm mt-2">
+                  ⚠️ Vælg venligst en lørdag eller søndag
+                </p>
+              )}
             </div>
 
             {/* Time Slots */}
-            {booking.date && (
+            {booking.date && isValidWeekend(booking.date) && (
               <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm animate-fadeIn">
                 <label className="block text-sm font-semibold text-gray-700 mb-3">
-                  ⏰ Vælg Tid
+                  ⏰ Vælg Tidspunkt
                 </label>
                 <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
-                  {timeSlots.map((time) => (
-                    <button
-                      key={time}
-                      onClick={() => {
-                        setBooking({ ...booking, date: booking.date, time });
-                        setStep(3);
-                      }}
-                      className={`py-3 px-2 rounded-xl text-sm font-medium transition-all ${
-                        booking.time === time
-                          ? "bg-blue-500 text-white"
-                          : "bg-gray-50 text-gray-700 hover:bg-blue-50 hover:text-blue-600 border border-gray-200"
-                      }`}
-                    >
-                      {time}
-                    </button>
-                  ))}
+                  {timeSlots.map((time) => {
+                    const booked = isSlotBooked(booking.date, time);
+                    return (
+                      <button
+                        key={time}
+                        disabled={booked}
+                        onClick={() => {
+                          setBooking({ ...booking, date: booking.date, time });
+                          setStep(3);
+                        }}
+                        className={`py-3 px-2 rounded-xl text-sm font-medium transition-all ${
+                          booked
+                            ? "bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed"
+                            : booking.time === time
+                            ? "bg-blue-500 text-white"
+                            : "bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200"
+                        }`}
+                      >
+                        {booked ? <span className="line-through">{time}</span> : time}
+                      </button>
+                    );
+                  })}
                 </div>
+                <div className="mt-4 flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-blue-50 border border-blue-200 rounded"></div>
+                    <span className="text-gray-600">Ledig</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-gray-100 border border-gray-200 rounded"></div>
+                    <span className="text-gray-400">Booket</span>
+                  </div>
+                </div>
+              </div>
+            )}
+            {booking.date && !isValidWeekend(booking.date) && (
+              <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-6 text-center">
+                <p className="text-yellow-800 font-medium">
+                  📅 Vi booker kun tid på lørdage og søndage
+                </p>
+                <p className="text-yellow-600 text-sm mt-1">
+                  Vælg venligst en lørdag eller søndag ovenfor
+                </p>
               </div>
             )}
           </div>
