@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "carwash.com - Book Your Car Wash",
+  title: "bilvask - Book Din Bilvask",
   description: "Book your car wash appointment online. Professional interior cleaning services in Charlottenlund.",
 };
 

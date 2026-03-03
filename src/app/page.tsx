@@ -196,7 +196,7 @@ export default function Home() {
                 </svg>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">carwash.com</h1>
+                <h1 className="text-2xl font-bold text-gray-900">bilvask</h1>
                 <p className="text-sm text-gray-500">Professionel Bilpleje</p>
                 <p className="text-xs text-blue-600 font-medium mt-1">Kun støvsugning og vask af bilens indvendige</p>
               </div>
