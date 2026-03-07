@@ -19,6 +19,19 @@ type Booking = {
   address: string;
 };
 
+type StoredBooking = {
+  id: number;
+  service: string;
+  date: string;
+  time: string;
+  name: string;
+  phone: string;
+  address: string;
+  price: number;
+  createdAt: Date;
+  reminderSent: boolean;
+};
+
 const services: Service[] = [
   {
     id: "interior",
@@ -33,19 +46,14 @@ const timeSlots = [
   "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00",
 ];
 
-// Simulated booked slots - in production this would come from a database
-// Format: "date-time" e.g., "2026-03-07-09:00"
-const bookedSlots: string[] = [
-  "2026-03-07-10:00",
-  "2026-03-07-14:00",
-  "2026-03-08-09:30",
-  "2026-03-08-11:00",
-  "2026-03-08-15:00",
-];
+// Booked slots will be fetched from database
+const initialBookedSlots: string[] = [];
 
 export default function Home() {
   const [step, setStep] = useState(1);
   const [addressError, setAddressError] = useState("");
+  const [bookedSlots, setBookedSlots] = useState<string[]>([]);
+  const [loadingSlots, setLoadingSlots] = useState(true);
   const [booking, setBooking] = useState<Booking>({
     service: null,
     date: "",
@@ -55,6 +63,44 @@ export default function Home() {
     address: "",
   });
   const [bookingComplete, setBookingComplete] = useState(false);
+
+  // Fetch booked slots from database on mount
+  useEffect(() => {
+    async function fetchBookings() {
+      try {
+        const response = await fetch("/api/bookings");
+        const data = await response.json();
+        if (data.bookings && Array.isArray(data.bookings)) {
+          // Create bookedSlots array from database bookings
+          const slots = data.bookings.map(
+            (b: StoredBooking) => `${b.date}-${b.time}`
+          );
+          setBookedSlots(slots);
+        }
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      } finally {
+        setLoadingSlots(false);
+      }
+    }
+    fetchBookings();
+  }, []);
+
+  // Function to refresh booked slots from database
+  const refreshBookedSlots = async () => {
+    try {
+      const response = await fetch("/api/bookings");
+      const data = await response.json();
+      if (data.bookings && Array.isArray(data.bookings)) {
+        const slots = data.bookings.map(
+          (b: StoredBooking) => `${b.date}-${b.time}`
+        );
+        setBookedSlots(slots);
+      }
+    } catch (error) {
+      console.error("Error refreshing bookings:", error);
+    }
+  };
 
   const handleServiceSelect = (service: Service) => {
     setBooking({ ...booking, service });
@@ -161,6 +207,8 @@ export default function Home() {
     setBooking({ ...booking, name, phone, address });
     setBookingComplete(true);
     setStep(4);
+    // Refresh booked slots to show the new booking as taken
+    refreshBookedSlots();
   };
 
   const handleBack = () => {
@@ -398,7 +446,13 @@ export default function Home() {
                 <label className="block text-sm font-semibold text-gray-700 mb-3">
                   ⏰ Vælg Tidspunkt
                 </label>
-                <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
+                {loadingSlots ? (
+                  <div className="text-center py-4 text-gray-500">
+                    <div className="animate-pulse">Henter bookinger...</div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
                   {timeSlots.map((time) => {
                     const booked = isSlotBooked(booking.date, time);
                     return (
@@ -422,16 +476,18 @@ export default function Home() {
                     );
                   })}
                 </div>
-                <div className="mt-4 flex items-center gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-blue-50 border border-blue-200 rounded"></div>
-                    <span className="text-gray-600">Ledig</span>
+                  <div className="mt-4 flex items-center gap-4 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-blue-50 border border-blue-200 rounded"></div>
+                      <span className="text-gray-600">Ledig</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-gray-100 border border-gray-200 rounded"></div>
+                      <span className="text-gray-400">Booket</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-gray-100 border border-gray-200 rounded"></div>
-                    <span className="text-gray-400">Booket</span>
-                  </div>
-                </div>
+                </>
+                )}
               </div>
             )}
             {booking.date && !isValidWeekend(booking.date) && (
