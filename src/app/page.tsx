@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type Service = {
   id: string;
@@ -57,6 +57,18 @@ export default function Home() {
     address: "",
   });
   const [bookingComplete, setBookingComplete] = useState(false);
+  const [recentBookings, setRecentBookings] = useState<any[]>([]);
+  const [showBookings, setShowBookings] = useState(false);
+
+  // Fetch recent bookings
+  useEffect(() => {
+    if (showBookings) {
+      fetch("/api/bookings")
+        .then(res => res.json())
+        .then(data => setRecentBookings(data.bookings || []))
+        .catch(err => console.error("Error fetching bookings:", err));
+    }
+  }, [showBookings]);
 
   const handleServiceSelect = (service: Service) => {
     setBooking({ ...booking, service });
@@ -207,10 +219,10 @@ export default function Home() {
             </div>
             <a 
               href="/admin" 
-              className="text-xs text-gray-400 hover:text-blue-600 transition-colors"
-              title="Admin"
+              className="text-xs bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors font-medium"
+              title="Admin - Se alle bookinger"
             >
-              ⚙️
+              📋 Se Bookinger
             </a>
           </div>
         </div>
@@ -219,37 +231,74 @@ export default function Home() {
       {/* Progress Steps */}
       <div className="bg-white border-b border-blue-100">
         <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-center gap-2 sm:gap-4">
-            {[1, 2, 3].map((s) => (
-              <div key={s} className="flex items-center">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
-                    step >= s
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-500"
-                  }`}
-                >
-                  {s}
-                </div>
-                <span
-                  className={`ml-2 text-sm font-medium hidden sm:inline ${
-                    step >= s ? "text-blue-600" : "text-gray-400"
-                  }`}
-                >
-                  {s === 1 ? "Tid" : s === 2 ? "Oplysninger" : "Bekræftelse"}
-                </span>
-                {s < 3 && (
+          <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center gap-2 sm:gap-4">
+              {[1, 2, 3].map((s) => (
+                <div key={s} className="flex items-center">
                   <div
-                    className={`w-8 sm:w-16 h-0.5 mx-2 ${
-                      step > s ? "bg-blue-500" : "bg-gray-200"
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
+                      step >= s
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200 text-gray-500"
                     }`}
-                  />
-                )}
-              </div>
-            ))}
+                  >
+                    {s}
+                  </div>
+                  <span
+                    className={`ml-2 text-sm font-medium hidden sm:inline ${
+                      step >= s ? "text-blue-600" : "text-gray-400"
+                    }`}
+                  >
+                    {s === 1 ? "Tid" : s === 2 ? "Oplysninger" : "Bekræftelse"}
+                  </span>
+                  {s < 3 && (
+                    <div
+                      className={`w-8 sm:w-16 h-0.5 mx-2 ${
+                        step > s ? "bg-blue-500" : "bg-gray-200"
+                      }`}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() => setShowBookings(!showBookings)}
+              className="text-xs text-blue-600 hover:text-blue-800 font-medium"
+            >
+              {showBookings ? "🔼 Skjul" : "📋 Vis bookinger"}
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Recent Bookings Section */}
+      {showBookings && (
+        <div className="bg-yellow-50 border-b border-yellow-200">
+          <div className="max-w-4xl mx-auto px-4 py-4">
+            <h3 className="font-bold text-gray-900 mb-3">📋 Alle Bookinger ({recentBookings.length})</h3>
+            {recentBookings.length === 0 ? (
+              <p className="text-gray-600">Ingen bookinger endnu</p>
+            ) : (
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {recentBookings.map((b: any) => (
+                  <div key={b.id} className="bg-white rounded-lg p-3 border shadow-sm text-sm">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="font-semibold">{b.name}</span>
+                        <span className="text-gray-500 ml-2">{b.phone}</span>
+                      </div>
+                      <span className="text-blue-600 font-bold">{b.price} kr.</span>
+                    </div>
+                    <div className="text-gray-600 mt-1">
+                      📅 {b.date} kl. {b.time} • {b.address}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         {/* Step 1: Service Selection */}
