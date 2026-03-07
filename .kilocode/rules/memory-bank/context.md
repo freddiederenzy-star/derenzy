@@ -22,6 +22,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Admin Dashboard** - View all bookings at /admin with name, phone, address, date, time
 - [x] **Booking API** - POST /api/bookings saves bookings, GET /api/bookings returns all bookings
 - [x] **SQLite Database** - Added Drizzle ORM with SQLite for persistent booking storage
+- [x] **MobilePay Payment Section** - Prominent green payment section on confirmation page with phone number +45 60 62 70 57
 
 ## Current Structure
 
