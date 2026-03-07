@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "bilvask - Book Din Bilvask",
   description: "Book your car wash appointment online. Professional interior cleaning services in Charlottenlund.",
+  metadataBase: new URL("https://bilvask.kiloapps.io"),
 };
 
 export default function RootLayout({
