@@ -57,18 +57,6 @@ export default function Home() {
     address: "",
   });
   const [bookingComplete, setBookingComplete] = useState(false);
-  const [recentBookings, setRecentBookings] = useState<any[]>([]);
-  const [showBookings, setShowBookings] = useState(false);
-
-  // Fetch recent bookings
-  useEffect(() => {
-    if (showBookings) {
-      fetch("/api/bookings")
-        .then(res => res.json())
-        .then(data => setRecentBookings(data.bookings || []))
-        .catch(err => console.error("Error fetching bookings:", err));
-    }
-  }, [showBookings]);
 
   const handleServiceSelect = (service: Service) => {
     setBooking({ ...booking, service });
@@ -261,44 +249,9 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <button
-              onClick={() => setShowBookings(!showBookings)}
-              className="text-xs text-blue-600 hover:text-blue-800 font-medium"
-            >
-              {showBookings ? "🔼 Skjul" : "📋 Vis bookinger"}
-            </button>
           </div>
         </div>
       </div>
-
-      {/* Recent Bookings Section */}
-      {showBookings && (
-        <div className="bg-yellow-50 border-b border-yellow-200">
-          <div className="max-w-4xl mx-auto px-4 py-4">
-            <h3 className="font-bold text-gray-900 mb-3">📋 Alle Bookinger ({recentBookings.length})</h3>
-            {recentBookings.length === 0 ? (
-              <p className="text-gray-600">Ingen bookinger endnu</p>
-            ) : (
-              <div className="space-y-2 max-h-64 overflow-y-auto">
-                {recentBookings.map((b: any) => (
-                  <div key={b.id} className="bg-white rounded-lg p-3 border shadow-sm text-sm">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <span className="font-semibold">{b.name}</span>
-                        <span className="text-gray-500 ml-2">{b.phone}</span>
-                      </div>
-                      <span className="text-blue-600 font-bold">{b.price} kr.</span>
-                    </div>
-                    <div className="text-gray-600 mt-1">
-                      📅 {b.date} kl. {b.time} • {b.address}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         {/* Step 1: Service Selection */}
