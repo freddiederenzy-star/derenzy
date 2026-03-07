@@ -5,8 +5,15 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
 const adminPhone = process.env.ADMIN_PHONE_NUMBER;
 
-// Initialize Twilio client (only if credentials are configured)
-const client = accountSid && authToken ? Twilio(accountSid, authToken) : null;
+// Initialize Twilio client (only if valid credentials are configured)
+let client: ReturnType<typeof Twilio> | null = null;
+if (accountSid && authToken && accountSid.startsWith('AC')) {
+  try {
+    client = Twilio(accountSid, authToken);
+  } catch (e) {
+    console.log("📱 Twilio kunne ikke initialiseres:", e);
+  }
+}
 
 export interface SendSMSOptions {
   to: string;
