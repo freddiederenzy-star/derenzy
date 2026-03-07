@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+// Simple admin password - in production use environment variable
+const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "bilvask2024";
+
 type Booking = {
   id: string;
   service: string;
@@ -18,10 +21,25 @@ type Booking = {
 export default function AdminPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      setError("");
+    } else {
+      setError("Forkert adgangskode");
+    }
+  };
 
   useEffect(() => {
-    fetchBookings();
-  }, []);
+    if (isAuthenticated) {
+      fetchBookings();
+    }
+  }, [isAuthenticated]);
 
   const fetchBookings = async () => {
     try {
@@ -48,12 +66,67 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-4xl mx-auto px-4 py-6">
-          <h1 className="text-2xl font-bold text-gray-900">📋 Admin - Bookinger</h1>
-          <p className="text-gray-600">Oversigt over alle bookinger</p>
+      {!isAuthenticated ? (
+        // Login Form
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <div className="bg-white p-8 rounded-2xl shadow-sm border max-w-md w-full mx-4">
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h1 className="text-2xl font-bold text-gray-900">Admin Login</h1>
+              <p className="text-gray-600 mt-2">Indtast adgangskode for at se bookinger</p>
+            </div>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Adgangskode
+                </label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  placeholder="Indtast adgangskode"
+                  required
+                />
+              </div>
+              {error && (
+                <p className="text-red-500 text-sm text-center">{error}</p>
+              )}
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
+              >
+                Log ind
+              </button>
+            </form>
+            <div className="mt-6 text-center">
+              <Link href="/" className="text-sm text-blue-600 hover:text-blue-800">
+                ← Tilbage til booking
+              </Link>
+            </div>
+          </div>
         </div>
-      </header>
+      ) : (
+        // Bookings List
+        <>
+          <header className="bg-white shadow-sm border-b">
+            <div className="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">📋 Admin - Bookinger</h1>
+                <p className="text-gray-600">Oversigt over alle bookinger</p>
+              </div>
+              <button
+                onClick={() => setIsAuthenticated(false)}
+                className="text-sm text-gray-500 hover:text-gray-700"
+              >
+                Log ud
+              </button>
+            </div>
+          </header>
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         {loading ? (
@@ -130,6 +203,8 @@ export default function AdminPage() {
       <footer className="text-center py-8 text-gray-500 text-sm">
         <Link href="/" className="hover:text-blue-600">← Tilbage til booking</Link>
       </footer>
+        </>
+      )}
     </div>
   );
 }
