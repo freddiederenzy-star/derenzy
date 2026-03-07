@@ -23,6 +23,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Booking API** - POST /api/bookings saves bookings, GET /api/bookings returns all bookings
 - [x] **SQLite Database** - Added Drizzle ORM with SQLite for persistent booking storage
 - [x] **MobilePay Payment Section** - Prominent green payment section on confirmation page with phone number +45 60 62 70 57
+- [x] **Dynamic Time Slots** - Time slots now fetch from database and show booked slots as gray
 
 ## Current Structure
 
@@ -112,3 +113,4 @@ export async function GET() {
 | 2026-03-03 | Added smart address validation for Charlottenlund |
 | 2026-03-03 | Added admin page (/admin) to view all bookings + booking API |
 | 2026-03-07 | Added SQLite database with Drizzle ORM for persistent booking storage |
+| 2026-03-07 | Added dynamic time slots that fetch from database and show booked slots as gray |
