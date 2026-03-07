@@ -465,10 +465,10 @@ export default function Home() {
                         }}
                         className={`py-3 px-2 rounded-xl text-sm font-medium transition-all ${
                           booked
-                            ? "bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed"
+                            ? "bg-gray-300 text-gray-500 border border-gray-400 cursor-not-allowed"
                             : booking.time === time
                             ? "bg-blue-500 text-white"
-                            : "bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200"
+                            : "bg-gray-200 text-gray-700 hover:bg-gray-300 border border-gray-300"
                         }`}
                       >
                         {booked ? <span className="line-through">{time}</span> : time}
@@ -478,12 +478,12 @@ export default function Home() {
                 </div>
                   <div className="mt-4 flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-blue-50 border border-blue-200 rounded"></div>
+                      <div className="w-4 h-4 bg-gray-200 border border-gray-300 rounded"></div>
                       <span className="text-gray-600">Ledig</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-gray-100 border border-gray-200 rounded"></div>
-                      <span className="text-gray-400">Booket</span>
+                      <div className="w-4 h-4 bg-gray-300 border border-gray-400 rounded"></div>
+                      <span className="text-gray-500">Booket</span>
                     </div>
                   </div>
                 </>
