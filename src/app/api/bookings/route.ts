@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
-import { bookings } from "@/lib/bookings";
+import { db } from "@/db";
+import { bookings } from "@/db/schema";
 import { sendBookingNotificationToAdmin, sendConfirmationToCustomer } from "@/lib/sms";
+import { desc } from "drizzle-orm";
 
 export async function POST(request: Request) {
   try {
@@ -15,9 +17,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create booking
-    const booking = {
-      id: `booking-${Date.now()}`,
+    // Create booking in database
+    const [newBooking] = await db.insert(bookings).values({
       service,
       date,
       time,
@@ -25,11 +26,9 @@ export async function POST(request: Request) {
       phone,
       address,
       price,
-      createdAt: new Date().toISOString(),
+      createdAt: new Date(),
       reminderSent: false,
-    };
-
-    bookings.push(booking);
+    }).returning();
 
     // Log booking for debugging
     console.log("=== NY BOOKING ===");
@@ -64,7 +63,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ 
       success: true, 
-      booking,
+      booking: newBooking,
       message: "Booking modtaget!"
     });
   } catch (error) {
@@ -77,9 +76,11 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  // Return all bookings (for admin purposes)
+  // Return all bookings from database (for admin purposes)
+  const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
+  
   return NextResponse.json({ 
-    bookings: bookings.reverse(),
-    count: bookings.length 
+    bookings: allBookings,
+    count: allBookings.length 
   });
 }

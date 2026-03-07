@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
-import { bookings } from "@/lib/bookings";
+import { db } from "@/db";
+import { bookings } from "@/db/schema";
 import { sendReminderToCustomer } from "@/lib/sms";
+import { eq } from "drizzle-orm";
 
 // This endpoint should be called every minute by a cron job
 // It checks for bookings that start in exactly 1 hour and sends reminders
@@ -27,10 +29,13 @@ export async function GET() {
   const now = new Date();
   console.log(`🔔 Tjekker for påmindelser kl. ${now.toLocaleString("da-DK")}`);
   
-  const remindersSent: string[] = [];
-  const errors: string[] = [];
+  // Get all bookings from database
+  const allBookings = await db.select().from(bookings);
+  
+  const remindersSent: number[] = [];
+  const errors: number[] = [];
 
-  for (const booking of bookings) {
+  for (const booking of allBookings) {
     // Skip if reminder already sent
     if (booking.reminderSent) continue;
 
@@ -52,7 +57,8 @@ export async function GET() {
         });
 
         if (sent) {
-          booking.reminderSent = true;
+          // Update reminderSent in database
+          await db.update(bookings).set({ reminderSent: true }).where(eq(bookings.id, booking.id));
           remindersSent.push(booking.id);
         }
       }
@@ -64,7 +70,7 @@ export async function GET() {
 
   return NextResponse.json({
     success: true,
-    checked: bookings.length,
+    checked: allBookings.length,
     sent: remindersSent.length,
     reminders: remindersSent,
     errors: errors.length,
