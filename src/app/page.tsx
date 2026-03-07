@@ -307,32 +307,89 @@ export default function Home() {
               Vælg en tid til din indvendige rengøring
             </p>
 
-            {/* Date Picker */}
+            {/* Date Picker - Month/Day Only */}
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
               <label className="block text-sm font-semibold text-gray-700 mb-3">
                 📅 Vælg Dato (Lørdag eller Søndag)
               </label>
-              <input
-                type="date"
-                min={new Date().toISOString().split("T")[0]}
-                value={booking.date}
-                onChange={(e) => {
-                  const selectedDate = e.target.value;
-                  const day = selectedDate ? new Date(selectedDate).getDay() : -1;
-                  
-                  // Only allow Saturday (5) or Sunday (6)
-                  if (day !== 5 && day !== 6 && selectedDate) {
-                    alert("Vi booker kun tid på lørdage og søndage. Vælg venligst en weekenddag.");
-                    return;
-                  }
-                  
-                  setBooking({ ...booking, date: selectedDate, time: "" });
-                }}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-              />
-              {booking.date && !isValidWeekend(booking.date) && (
-                <p className="text-red-500 text-sm mt-2">
-                  ⚠️ Vælg venligst en lørdag eller søndag
+              
+              {/* Month and Day Selection */}
+              <div className="flex gap-3">
+                {/* Month Select */}
+                <select
+                  value={booking.date ? parseInt(booking.date.split('-')[1]) : ''}
+                  onChange={(e) => {
+                    const month = e.target.value;
+                    if (!month) return;
+                    
+                    // Get current year and find next valid weekend
+                    const now = new Date();
+                    let year = now.getFullYear();
+                    let foundDate = null;
+                    
+                    // Try to find a weekend day in selected month
+                    for (let day = 1; day <= 31; day++) {
+                      const testDate = new Date(year, parseInt(month) - 1, day);
+                      if (testDate.getMonth() !== parseInt(month) - 1) break;
+                      const dayOfWeek = testDate.getDay();
+                      if (dayOfWeek === 5 || dayOfWeek === 6) { // Saturday or Sunday
+                        foundDate = testDate.toISOString().split('T')[0];
+                        break;
+                      }
+                    }
+                    
+                    if (foundDate) {
+                      setBooking({ ...booking, date: foundDate, time: "" });
+                    }
+                  }}
+                  className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                >
+                  <option value="">Måned</option>
+                  <option value="3">Marts</option>
+                  <option value="4">April</option>
+                  <option value="5">Maj</option>
+                  <option value="6">Juni</option>
+                  <option value="7">Juli</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">Oktober</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+                
+                {/* Day Select */}
+                <select
+                  value={booking.date ? parseInt(booking.date.split('-')[2]) : ''}
+                  onChange={(e) => {
+                    const day = e.target.value;
+                    if (!day || !booking.date) return;
+                    
+                    const parts = booking.date.split('-');
+                    const newDate = `${parts[0]}-${parts[1]}-${day.padStart(2, '0')}`;
+                    
+                    // Verify it's a weekend
+                    const selectedDate = new Date(newDate);
+                    const dayOfWeek = selectedDate.getDay();
+                    if (dayOfWeek !== 5 && dayOfWeek !== 6) {
+                      alert("Vi booker kun tid på lørdage og søndage. Vælg venligst en weekenddag.");
+                      return;
+                    }
+                    
+                    setBooking({ ...booking, date: newDate, time: "" });
+                  }}
+                  className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  disabled={!booking.date}
+                >
+                  <option value="">Dag</option>
+                  {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31].map(d => (
+                    <option key={d} value={d}>{d}</option>
+                  ))}
+                </select>
+              </div>
+              
+              {booking.date && (
+                <p className="text-green-600 text-sm mt-2 font-medium">
+                  ✅ Valgt: {new Date(booking.date).toLocaleDateString('da-DK', { weekday: 'long', day: 'numeric', month: 'long' })}
                 </p>
               )}
             </div>
@@ -409,7 +466,7 @@ export default function Home() {
               Dine Oplysninger
             </h2>
             <p className="text-gray-600 text-center mb-8">
-              {booking.service?.name} • {booking.date} kl. {booking.time}
+              {booking.service?.name} • {booking.date ? new Date(booking.date).toLocaleDateString('da-DK', { day: 'numeric', month: 'long' }) : ''} kl. {booking.time}
             </p>
 
             <form
