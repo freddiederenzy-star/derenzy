@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import BilvaskPage from "./bilvask/page";
 
 export default function Home() {
-  redirect("/bilvask");
+  return <BilvaskPage />;
 }
