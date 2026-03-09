@@ -114,3 +114,4 @@ export async function GET() {
 | 2026-03-03 | Added admin page (/admin) to view all bookings + booking API |
 | 2026-03-07 | Added SQLite database with Drizzle ORM for persistent booking storage |
 | 2026-03-07 | Added dynamic time slots that fetch from database and show booked slots as gray |
+| 2026-03-09 | Moved booking page to root URL (/) - now works at bilvaskcharlottenlund.kiloapps.io/ |
