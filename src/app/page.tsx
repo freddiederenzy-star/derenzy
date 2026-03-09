@@ -37,7 +37,7 @@ const services: Service[] = [
     id: "interior",
     name: "Indvendig Rengøring",
     description: "Støvsugning og vask af bilens indvendige - sæder, gulvmåtter, instrumentpanel og ruder",
-    price: 99,
+    price: 150,
     duration: 60,
   },
 ];
