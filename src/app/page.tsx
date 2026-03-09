@@ -1,5 +1,5 @@
-import BilvaskPage from "./bilvaskcharlottenlund/page";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <BilvaskPage />;
+  redirect("/bilvaskcharlottenlund");
 }
