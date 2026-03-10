@@ -64,11 +64,16 @@ export default function Home() {
   });
   const [bookingComplete, setBookingComplete] = useState(false);
 
-  // Fetch booked slots from database on mount
+  // Fetch booked slots from database on mount - optimized with date filter
   useEffect(() => {
     async function fetchBookings() {
       try {
-        const response = await fetch("/api/bookings");
+        // Get current month date range for faster query
+        const now = new Date();
+        const startDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+        const endDate = new Date(now.getFullYear(), now.getMonth() + 3, 0).toISOString().split('T')[0];
+        
+        const response = await fetch(`/api/bookings?startDate=${startDate}&endDate=${endDate}`);
         const data = await response.json();
         if (data.bookings && Array.isArray(data.bookings)) {
           // Create bookedSlots array from database bookings

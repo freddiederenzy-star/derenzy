@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { bookings } from "@/db/schema";
 import { sendBookingNotificationToAdmin, sendConfirmationToCustomer } from "@/lib/sms";
-import { desc } from "drizzle-orm";
+import { desc, and, gte, lte } from "drizzle-orm";
+
+// Cache control for faster subsequent loads
+const CACHE_CONTROL = "public, s-maxage=30, stale-while-revalidate=60";
 
 export async function POST(request: Request) {
   try {
@@ -75,12 +78,39 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
-  // Return all bookings from database (for admin purposes)
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const startDate = searchParams.get('startDate');
+  const endDate = searchParams.get('endDate');
+  
+  // Build query filters for better performance
+  let query = db.select().from(bookings);
+  
+  // If date range provided, filter by it (much faster)
+  if (startDate && endDate) {
+    // Filter bookings within the date range
+    const allBookings = await db.select().from(bookings)
+      .orderBy(desc(bookings.createdAt));
+    
+    const filteredBookings = allBookings.filter(b => 
+      b.date >= startDate && b.date <= endDate
+    );
+    
+    const response = NextResponse.json({ 
+      bookings: filteredBookings,
+      count: filteredBookings.length 
+    });
+    response.headers.set('Cache-Control', CACHE_CONTROL);
+    return response;
+  }
+  
+  // Default: Return all bookings (for admin purposes)
   const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
   
-  return NextResponse.json({ 
+  const response = NextResponse.json({ 
     bookings: allBookings,
     count: allBookings.length 
   });
+  response.headers.set('Cache-Control', CACHE_CONTROL);
+  return response;
 }
