@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { bookings } from "@/db/schema";
 import { sendBookingNotificationToAdmin, sendConfirmationToCustomer } from "@/lib/sms";
-import { desc, and, gte, lte } from "drizzle-orm";
+import { desc, and, gte, lte, eq } from "drizzle-orm";
 
 // Cache control for faster subsequent loads
 const CACHE_CONTROL = "public, s-maxage=30, stale-while-revalidate=60";
@@ -93,15 +93,57 @@ export async function GET(request: Request) {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
+    // Get all bookings first
+    const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
+    
+    console.log("Total bookings in DB:", allBookings.length);
+
+    // Auto-delete bookings that have passed (both date AND time have passed)
+    // Current time
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const currentTimeInMinutes = currentHour * 60 + currentMinute;
+    
+    // Today's date string
+    const todayStr = today.toISOString().split('T')[0];
+
+    // Find and delete old bookings
+    const bookingsToDelete: number[] = [];
+    for (const booking of allBookings) {
+      const bookingDate = new Date(booking.date);
+      const bookingDateOnly = bookingDate.toISOString().split('T')[0];
+      
+      // Parse booking time
+      const [bookingHour, bookingMinute] = booking.time.split(':').map(Number);
+      const bookingTimeInMinutes = bookingHour * 60 + bookingMinute;
+      
+      // If booking date is in the past, or if it's today and the time has passed (plus 2 hours buffer)
+      if (bookingDateOnly < todayStr) {
+        // Past date - mark for deletion
+        bookingsToDelete.push(booking.id);
+      } else if (bookingDateOnly === todayStr && currentTimeInMinutes > bookingTimeInMinutes + 120) {
+        // Today but time has passed (2 hour buffer after appointment)
+        bookingsToDelete.push(booking.id);
+      }
+    }
+
+    // Delete old bookings
+    if (bookingsToDelete.length > 0) {
+      console.log(`Deleting ${bookingsToDelete.length} old booking(s):`, bookingsToDelete);
+      for (const id of bookingsToDelete) {
+        await db.delete(bookings).where(eq(bookings.id, id));
+      }
+    }
+
     // If date range provided, filter by it (much faster)
     if (startDate && endDate) {
-      // Filter bookings within the date range
-      const allBookings = await db.select().from(bookings)
+      // Re-fetch bookings after cleanup
+      const rangeBookings = await db.select().from(bookings)
         .orderBy(desc(bookings.createdAt));
 
-      console.log("Total bookings in DB:", allBookings.length);
+      console.log("Total bookings in DB after cleanup:", rangeBookings.length);
 
-      const filteredBookings = allBookings.filter(b =>
+      const filteredBookings = rangeBookings.filter(b =>
         b.date >= startDate && b.date <= endDate
       );
 
@@ -113,14 +155,14 @@ export async function GET(request: Request) {
       return response;
     }
 
-    // Default: Return all bookings (for admin purposes)
-    const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
+    // Default: Return all bookings (for admin purposes) - re-fetch after cleanup
+    const validBookingsList = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
     
-    console.log("Total bookings in DB:", allBookings.length);
+    console.log("Total bookings in DB after cleanup:", validBookingsList.length);
 
     // Filter out bookings from past Saturdays (keep them in DB but don't show)
     // A booking is considered "past" if the date is before today
-    const validBookings = allBookings.filter(b => {
+    const validBookings = validBookingsList.filter(b => {
       const bookingDate = new Date(b.date);
       return bookingDate >= today;
     });

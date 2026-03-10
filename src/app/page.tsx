@@ -506,7 +506,7 @@ export default function Home() {
                             ? "bg-slate-700/50 text-slate-500 border border-slate-600 cursor-not-allowed"
                             : booking.time === time
                             ? "bg-cyan-500 text-white"
-                            : "bg-slate-700 text-white hover:bg-cyan-600 border border-slate-600 hover:border-cyan-500"
+                            : "bg-blue-500 text-white hover:bg-blue-600 border border-blue-400 hover:border-blue-300"
                         }`}
                       >
                         {booked ? <span className="line-through">{time}</span> : time}
@@ -515,7 +515,7 @@ export default function Home() {
                   })}
                 </div>
                   <div className="mt-4 flex items-center gap-4 text-sm">
-                    <span className="text-slate-400">Ledig</span>
+                    <span className="flex items-center gap-2 text-blue-400"><span className="w-3 h-3 bg-blue-500 rounded"></span> Ledig</span>
                     <span className="text-slate-500">Booket</span>
                   </div>
                 </>
