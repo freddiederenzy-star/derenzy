@@ -246,7 +246,6 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <span className="text-white font-bold text-lg">Frederik&apos;s</span>
           </div>
           <div className="flex items-center gap-2">
             <a 
@@ -274,7 +273,7 @@ export default function Home() {
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 animate-gradient">
-              Frederik&apos;s Bilvaskning 🚗
+              Bilvaskning
             </span>
             <span className="block text-3xl md:text-4xl mt-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
               i verdensklasse
