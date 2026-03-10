@@ -30,9 +30,8 @@ export default function Om() {
             Jeg driver denne bilvaskning som et lille foretagende, hvor jeg vasker biler for folk i nærheden.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            Jeg startede dette for at tjene mine egne penge, men jeg har en drøm om at bruge det hele 
-            på <strong>velgørenhed</strong>. Når jeg bliver ældre, vil jeg gerne kunne give noget tilbage 
-            til samfundet og hjælpe dem, der har brug for det.
+            Jeg startede dette for at tjene mine egne penge og lære om at drive en virksomhed. 
+            En del af pengene går til <strong>velgørenhed</strong>, og resten tjener jeg selv på denne service.
           </p>
         </div>
 
@@ -42,8 +41,8 @@ export default function Om() {
           <p className="text-green-700 leading-relaxed">
             Jeg tror på, at man aldrig er for ung til at gøre en forskel. Selvom jeg kun er 14 år, 
             vil jeg gerne vise, at unge mennesker kan bidrage til samfundet. En del af de penge, jeg tjener 
-            på at vaske biler, går til <strong>velgørenhed</strong> - og selvfølgelig går der også nogle penge 
-            til mig selv, så jeg kan fortsætte med at tilbyde denne service.
+            på at vaske biler, støtter <strong>velgørenhed</strong> - og resten tjener jeg selv, så jeg kan 
+            fortsætte med at tilbyde denne service og lære om at drive en virksomhed.
           </p>
         </div>
 
@@ -73,7 +72,7 @@ export default function Om() {
         {/* Contact / CTA */}
         <div className="text-center">
           <p className="text-gray-600 mb-6">
-            Støt en ung iværksætter med et godt formål!
+            Støt en ung iværksætter!
           </p>
           <Link 
             href="/"
