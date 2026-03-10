@@ -24,7 +24,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **SQLite Database** - Added Drizzle ORM with SQLite for persistent booking storage
 - [x] **MobilePay Payment Section** - Prominent green payment section on confirmation page with phone number +45 60 62 70 57
 - [x] **Dynamic Time Slots** - Time slots now fetch from database and show booked slots as gray
-- [x] **Price Update** - Changed price from 99kr to 150kr
+- [x] **Price Update** - Changed price from 150kr to 149kr
 - [x] **Performance Optimization** - Added date range filtering to booking API and caching headers for faster page loads
 - [x] **Bug Fix: Summer Bookings** - Extended booking date range from 3 months to 1 year ahead so July bookings now show as booked
 - [x] **Om Mig About Page** - New page at /om with Frederik's story explaining he's 14 years old and giving money to charity
@@ -125,3 +125,4 @@ export async function GET() {
 | 2026-03-07 | Added SQLite database with Drizzle ORM for persistent booking storage |
 | 2026-03-07 | Added dynamic time slots that fetch from database and show booked slots as gray |
 | 2026-03-09 | Updated price to 150kr |
+| 2026-03-10 | Updated price to 149kr and simplified booking text |
