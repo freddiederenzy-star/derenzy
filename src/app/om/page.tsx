@@ -27,7 +27,7 @@ export default function Om() {
           <h3 className="text-xl font-bold text-gray-800 mb-4">Hvem er jeg?</h3>
           <p className="text-gray-600 leading-relaxed mb-4">
             Jeg hedder <strong>Frederik Tefre-De Renzy Martin</strong> og jeg er 14 år gammel. 
-            Jeg driver denne dækservice som et lille foretagende, hvor jeg vasker biler for folk i nærheden.
+            Jeg driver denne bilvaskning som et lille foretagende, hvor jeg vasker biler for folk i nærheden.
           </p>
           <p className="text-gray-600 leading-relaxed">
             Jeg startede dette for at tjene mine egne penge, men jeg har en drøm om at bruge det hele 
@@ -42,8 +42,8 @@ export default function Om() {
           <p className="text-green-700 leading-relaxed">
             Jeg tror på, at man aldrig er for ung til at gøre en forskel. Selvom jeg kun er 14 år, 
             vil jeg gerne vise, at unge mennesker kan bidrage til samfundet. En del af de penge, jeg tjener 
-            på at vaske biler, går til <strong>velgørenhed</strong> - resten bruger jeg på materialer og udstyr 
-            så jeg kan fortsætte med at tilbyde denne service.
+            på at vaske biler, går til <strong>velgørenhed</strong> - og selvfølgelig går der også nogle penge 
+            til mig selv, så jeg kan fortsætte med at tilbyde denne service.
           </p>
         </div>
 

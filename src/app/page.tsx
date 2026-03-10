@@ -265,7 +265,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="pt-12 pb-12 px-4">
+      <div className="pt-4 pb-8 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-cyan-500/20 border border-cyan-500/30 rounded-full px-4 py-2 mb-6">
             <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
@@ -359,8 +359,11 @@ export default function Home() {
             </button>
 
             <h2 className="text-2xl font-bold text-white mb-2 text-center">
-              Vælg din tid
+              Vaskning
             </h2>
+            <h3 className="text-xl font-bold text-cyan-400 mb-2 text-center">
+              Vælg tidspunkt
+            </h3>
             <p className="text-slate-400 text-center mb-8">
               Vælg en tid der passer dig
             </p>
