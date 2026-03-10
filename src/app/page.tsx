@@ -68,10 +68,10 @@ export default function Home() {
   useEffect(() => {
     async function fetchBookings() {
       try {
-        // Get current month date range for faster query
+        // Get date range for full year ahead for fetching all relevant bookings
         const now = new Date();
         const startDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
-        const endDate = new Date(now.getFullYear(), now.getMonth() + 3, 0).toISOString().split('T')[0];
+        const endDate = new Date(now.getFullYear() + 1, 11, 31).toISOString().split('T')[0]; // Full year ahead
         
         const response = await fetch(`/api/bookings?startDate=${startDate}&endDate=${endDate}`);
         const data = await response.json();
@@ -94,9 +94,11 @@ export default function Home() {
   // Function to refresh booked slots from database
   const refreshBookedSlots = async () => {
     try {
+      // Fetch all bookings (no date filter) to ensure we catch all booked slots
       const response = await fetch("/api/bookings");
       const data = await response.json();
       if (data.bookings && Array.isArray(data.bookings)) {
+        // Create bookedSlots array from database bookings
         const slots = data.bookings.map(
           (b: StoredBooking) => `${b.date}-${b.time}`
         );
