@@ -307,15 +307,12 @@ export default function Home() {
                   <div className="flex flex-wrap gap-2">
                     <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">Støvsugning</span>
                     <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">Vaskning med sæbe</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">Sæder og tæpper</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">Plastdele</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">Udvendig aftørring</span>
                   </div>
                 </div>
                 <div className="text-right ml-4">
                   <span className="text-3xl font-bold text-cyan-400">{services[0].price} kr.</span>
                   <p className="text-xs text-slate-500">{services[0].duration} min</p>
-                  <p className="text-xs text-green-400 mt-1 font-medium">Betales efter med MobilePay</p>
+                  <p className="text-xs text-green-400 mt-1 font-medium">Betales efter vask med MobilePay</p>
                 </div>
               </div>
               <button
@@ -354,7 +351,12 @@ export default function Home() {
             {/* Date Picker */}
             <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 mb-6">
               <label className="block text-sm font-semibold text-white mb-3">
-                Vælg Dato (Lørdag eller Søndag)
+                <span className="inline-flex items-center gap-2">
+                  <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Vælg Dato (Lørdag eller Søndag)
+                </span>
               </label>
               
               <div className="flex gap-3">
@@ -365,12 +367,15 @@ export default function Home() {
                     if (!month) return;
                     
                     const now = new Date();
+                    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
                     let year = now.getFullYear();
                     let foundDate = null;
                     
                     for (let day = 1; day <= 31; day++) {
                       const testDate = new Date(year, parseInt(month) - 1, day);
                       if (testDate.getMonth() !== parseInt(month) - 1) break;
+                      // Skip dates in the past
+                      if (testDate < today) continue;
                       const dayOfWeek = testDate.getDay();
                       if (dayOfWeek === 5 || dayOfWeek === 6) {
                         foundDate = testDate.toISOString().split('T')[0];
@@ -380,6 +385,8 @@ export default function Home() {
                     
                     if (foundDate) {
                       setBooking({ ...booking, date: foundDate, time: "" });
+                    } else {
+                      alert("Ingen ledige weekenddage i denne måned. Vælg en anden måned.");
                     }
                   }}
                   className="flex-1 px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all"
@@ -407,6 +414,15 @@ export default function Home() {
                     const newDate = `${parts[0]}-${parts[1]}-${day.padStart(2, '0')}`;
                     
                     const selectedDate = new Date(newDate);
+                    const now = new Date();
+                    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                    
+                    // Check if date is in the past
+                    if (selectedDate < today) {
+                      alert("Du kan ikke booke dage i fortiden. Vælg en dato fra i dag eller frem.");
+                      return;
+                    }
+                    
                     const dayOfWeek = selectedDate.getDay();
                     if (dayOfWeek !== 5 && dayOfWeek !== 6) {
                       alert("Vi booker kun tid på lørdage og søndage. Vælg venligst en weekenddag.");
@@ -436,7 +452,12 @@ export default function Home() {
             {booking.date && isValidWeekend(booking.date) && (
               <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 animate-fadeIn">
                 <label className="block text-sm font-semibold text-white mb-3">
-                  Vælg Tidspunkt
+                  <span className="inline-flex items-center gap-2">
+                    <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Vælg Tidspunkt
+                  </span>
                 </label>
                 {loadingSlots ? (
                   <div className="text-center py-4 text-slate-400">
@@ -656,7 +677,7 @@ export default function Home() {
 
               {/* Payment Section - MobilePay */}
               <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-6 mb-6 text-white shadow-lg shadow-green-500/25">
-                <h3 className="font-bold text-lg mb-2">💳 Betales efter med MobilePay</h3>
+                <h3 className="font-bold text-lg mb-2">Betales efter vask med MobilePay</h3>
                 <p className="text-green-100 text-sm mb-4">
                   Betales efter rengøringen er udført. Scan QR-koden eller send beløbet til:
                 </p>

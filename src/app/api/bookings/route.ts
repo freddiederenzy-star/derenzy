@@ -83,6 +83,10 @@ export async function GET(request: Request) {
   const startDate = searchParams.get('startDate');
   const endDate = searchParams.get('endDate');
   
+  // Get today's date to filter out old bookings
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  
   // Build query filters for better performance
   let query = db.select().from(bookings);
   
@@ -107,9 +111,16 @@ export async function GET(request: Request) {
   // Default: Return all bookings (for admin purposes)
   const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
   
+  // Filter out bookings from past Saturdays (keep them in DB but don't show)
+  // A booking is considered "past" if the date is before today
+  const validBookings = allBookings.filter(b => {
+    const bookingDate = new Date(b.date);
+    return bookingDate >= today;
+  });
+  
   const response = NextResponse.json({ 
-    bookings: allBookings,
-    count: allBookings.length 
+    bookings: validBookings,
+    count: validBookings.length 
   });
   response.headers.set('Cache-Control', CACHE_CONTROL);
   return response;
