@@ -306,10 +306,10 @@ export default function Home() {
                   <p className="text-slate-400 text-sm mb-4">{services[0].description}</p>
                   <div className="flex flex-wrap gap-2">
                     <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">
-                      <span className="font-semibold">Støvsugning:</span> Hele bilen inkl. sæder, gulvtæpper, bagagerum og fuger
+                      <span className="font-semibold">Støvsugning:</span> Hele bilen
                     </span>
                     <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">
-                      <span className="font-semibold">Vaskning:</span> Sæbe + vand, affedtning af plastdele, rens af sæder og tæpper, udvendig aftørring af døre og paneler
+                      <span className="font-semibold">Vaskning:</span> Sæbe og vand
                     </span>
                   </div>
                 </div>
