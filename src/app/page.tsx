@@ -304,13 +304,15 @@ export default function Home() {
                     </h3>
                   </div>
                   <p className="text-slate-400 text-sm mb-4">{services[0].description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">
-                      <span className="font-semibold">Støvsugning:</span> Hele bilen
-                    </span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">
-                      <span className="font-semibold">Vaskning:</span> Sæbe og vand
-                    </span>
+                  <div className="flex flex-col gap-2">
+                    <div className="bg-cyan-500/20 text-cyan-300 px-3 py-2 rounded-lg border border-cyan-500/20">
+                      <span className="font-semibold block text-xs uppercase tracking-wide">Støvsugning</span>
+                      <span className="text-sm">Hele bilen</span>
+                    </div>
+                    <div className="bg-cyan-500/20 text-cyan-300 px-3 py-2 rounded-lg border border-cyan-500/20">
+                      <span className="font-semibold block text-xs uppercase tracking-wide">Vaskning</span>
+                      <span className="text-sm">Vasker med sæbe</span>
+                    </div>
                   </div>
                 </div>
                 <div className="text-right ml-4">
