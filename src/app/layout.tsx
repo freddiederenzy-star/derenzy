@@ -35,6 +35,9 @@ export default function RootLayout({
             <Link href="/om" className="text-blue-100 hover:text-white transition-colors">
               Om mig
             </Link>
+            <Link href="/admin" className="text-blue-100 hover:text-white transition-colors">
+              Se bookinger
+            </Link>
           </div>
         </nav>
         {children}
