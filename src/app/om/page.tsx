@@ -27,10 +27,16 @@ export default function Om() {
           <h3 className="text-xl font-bold text-gray-800 mb-4">Hvem er jeg?</h3>
           <p className="text-gray-600 leading-relaxed mb-4">
             Jeg hedder <strong>Frederik</strong> og jeg er 14 år gammel. 
-            Jeg vasker biler for folk i nærheden.
+            Jeg vasker biler for folk i nærheden. Det startede jeg med fordi jeg ville 
+            tjene mine egne penge og lære noget om at drive en virksomhed.
+          </p>
+          <p className="text-gray-600 leading-relaxed mb-4">
+            Jeg gør mit bedste hver gang og sørger for at din bil bliver ordentligt ren. 
+            Jeg bruger tid på at gøre det godt, ikke hurtigt.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            En del af pengene går til <strong>velgørenhed</strong>, og resten tjener jeg selv.
+            En del af pengene går til <strong>velgørenhed</strong>, og resten tjener jeg selv. 
+            På den måde hjælper jeg både dig og andre!
           </p>
         </div>
 
