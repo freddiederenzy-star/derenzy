@@ -307,19 +307,19 @@ export default function Home() {
                   <ul className="space-y-2 mb-4">
                     <li className="flex items-start gap-2 text-slate-300">
                       <span className="text-cyan-400 mt-1">✓</span>
-                      <span>Støvsugning med rigtig støvsuger</span>
+                      <span>Grundig støvsugning af hele bilen indvendig - sæder, tæpper og bagagerum</span>
                     </li>
                     <li className="flex items-start gap-2 text-slate-300">
                       <span className="text-cyan-400 mt-1">✓</span>
-                      <span>Vaskning med sæbe</span>
+                      <span>Komplet vaskning af alle indvendige flader med sæbe og specialrengøring</span>
                     </li>
                     <li className="flex items-start gap-2 text-slate-300">
                       <span className="text-cyan-400 mt-1">✓</span>
-                      <span>Rensning af sæder og tæpper</span>
+                      <span>Professionel rensning og pletfjerning af sæder, tæpper og polstring</span>
                     </li>
                     <li className="flex items-start gap-2 text-slate-300">
                       <span className="text-cyan-400 mt-1">✓</span>
-                      <span>Affedtning og rengøring af plastdele</span>
+                      <span>Affedtning og dybderengøring af alle plastdele, instrumentpanel og dørpuder</span>
                     </li>
                   </ul>
                   <div className="bg-green-500/20 text-green-300 px-4 py-3 rounded-xl border border-green-500/30 mb-4">
