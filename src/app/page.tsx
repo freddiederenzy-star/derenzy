@@ -36,7 +36,7 @@ const services: Service[] = [
   {
     id: "interior",
     name: "Indvendig Bilvaskning",
-    description: "Vi giver din bil en komplet indvendig rengøring! Vi støvsuger hele bilen grundigt med rigtig støvsuger - sæder, tæpper, bagagerum og alle kroge. Vasker alle indvendige flader med sæbe og rengøringsmidler. Renser og plejer sæder og tæpper for at fjerne pletter og give dem nyt liv. Affedter og rengør alle plastdele indvendigt - dashboard, dørpaneler, konsoller og mere. Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen!",
+    description: "Vi giver din bil en komplet indvendig rengøring!",
     price: 150,
     duration: 60,
   },
@@ -303,16 +303,27 @@ export default function Home() {
                       {services[0].name}
                     </h3>
                   </div>
-                  <p className="text-slate-400 text-base mb-4 leading-relaxed">{services[0].description}</p>
-                  <div className="flex flex-col gap-2">
-                    <div className="bg-cyan-500/20 text-cyan-300 px-3 py-2 rounded-lg border border-cyan-500/20">
-                      <span className="font-semibold block text-xs uppercase tracking-wide">Støvsugning</span>
-                      <span className="text-sm">Hele bilen</span>
-                    </div>
-                    <div className="bg-cyan-500/20 text-cyan-300 px-3 py-2 rounded-lg border border-cyan-500/20">
-                      <span className="font-semibold block text-xs uppercase tracking-wide">Vaskning</span>
-                      <span className="text-sm">Vasker med sæbe</span>
-                    </div>
+                  <p className="text-slate-400 text-lg mb-4 leading-relaxed">{services[0].description}</p>
+                  <ul className="space-y-2 mb-4">
+                    <li className="flex items-start gap-2 text-slate-300">
+                      <span className="text-cyan-400 mt-1">✓</span>
+                      <span>Støvsugning med rigtig støvsuger</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-slate-300">
+                      <span className="text-cyan-400 mt-1">✓</span>
+                      <span>Vaskning med sæbe</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-slate-300">
+                      <span className="text-cyan-400 mt-1">✓</span>
+                      <span>Rensning af sæder og tæpper</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-slate-300">
+                      <span className="text-cyan-400 mt-1">✓</span>
+                      <span>Affedtning og rengøring af plastdele</span>
+                    </li>
+                  </ul>
+                  <div className="bg-green-500/20 text-green-300 px-4 py-3 rounded-xl border border-green-500/30 mb-4">
+                    <span className="font-semibold text-base">Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen!</span>
                   </div>
                 </div>
                 <div className="text-right ml-4">
