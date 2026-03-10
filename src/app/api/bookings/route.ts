@@ -64,8 +64,8 @@ export async function POST(request: Request) {
       address,
     });
 
-    return NextResponse.json({ 
-      success: true, 
+    return NextResponse.json({
+      success: true,
       booking: newBooking,
       message: "Booking modtaget!"
     });
@@ -79,49 +79,52 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const startDate = searchParams.get('startDate');
-  const endDate = searchParams.get('endDate');
-  
-  // Get today's date to filter out old bookings
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  
-  // Build query filters for better performance
-  let query = db.select().from(bookings);
-  
-  // If date range provided, filter by it (much faster)
-  if (startDate && endDate) {
-    // Filter bookings within the date range
-    const allBookings = await db.select().from(bookings)
-      .orderBy(desc(bookings.createdAt));
-    
-    const filteredBookings = allBookings.filter(b => 
-      b.date >= startDate && b.date <= endDate
-    );
-    
-    const response = NextResponse.json({ 
-      bookings: filteredBookings,
-      count: filteredBookings.length 
+  try {
+    const { searchParams } = new URL(request.url);
+    const startDate = searchParams.get('startDate');
+    const endDate = searchParams.get('endDate');
+
+    // Get today's date to filter out old bookings
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    // If date range provided, filter by it (much faster)
+    if (startDate && endDate) {
+      // Filter bookings within the date range
+      const allBookings = await db.select().from(bookings)
+        .orderBy(desc(bookings.createdAt));
+
+      const filteredBookings = allBookings.filter(b =>
+        b.date >= startDate && b.date <= endDate
+      );
+
+      const response = NextResponse.json({
+        bookings: filteredBookings,
+        count: filteredBookings.length
+      });
+      response.headers.set('Cache-Control', CACHE_CONTROL);
+      return response;
+    }
+
+    // Default: Return all bookings (for admin purposes)
+    const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
+
+    // Filter out bookings from past Saturdays (keep them in DB but don't show)
+    // A booking is considered "past" if the date is before today
+    const validBookings = allBookings.filter(b => {
+      const bookingDate = new Date(b.date);
+      return bookingDate >= today;
+    });
+
+    const response = NextResponse.json({
+      bookings: validBookings,
+      count: validBookings.length
     });
     response.headers.set('Cache-Control', CACHE_CONTROL);
     return response;
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    // Return empty array on error so the frontend doesn't crash
+    return NextResponse.json({ bookings: [], count: 0 });
   }
-  
-  // Default: Return all bookings (for admin purposes)
-  const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
-  
-  // Filter out bookings from past Saturdays (keep them in DB but don't show)
-  // A booking is considered "past" if the date is before today
-  const validBookings = allBookings.filter(b => {
-    const bookingDate = new Date(b.date);
-    return bookingDate >= today;
-  });
-  
-  const response = NextResponse.json({ 
-    bookings: validBookings,
-    count: validBookings.length 
-  });
-  response.headers.set('Cache-Control', CACHE_CONTROL);
-  return response;
 }
