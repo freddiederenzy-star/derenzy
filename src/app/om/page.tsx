@@ -93,7 +93,7 @@ export default function Om() {
 
       {/* Footer */}
       <footer className="bg-gray-800 text-gray-400 py-6 text-center">
-        <p>© 2026 Bilservice - drevet af Frederik</p>
+        <p>© 2026 Frederiks Bilvaskning - drevet af Frederik</p>
       </footer>
     </div>
   );
