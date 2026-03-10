@@ -26,6 +26,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Dynamic Time Slots** - Time slots now fetch from database and show booked slots as gray
 - [x] **Price Update** - Changed price from 99kr to 150kr
 - [x] **Performance Optimization** - Added date range filtering to booking API and caching headers for faster page loads
+- [x] **Bug Fix: Summer Bookings** - Extended booking date range from 3 months to 1 year ahead so July bookings now show as booked
 
 ## Current Structure
 
