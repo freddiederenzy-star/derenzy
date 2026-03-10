@@ -27,12 +27,15 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Price Update** - Changed price from 99kr to 150kr
 - [x] **Performance Optimization** - Added date range filtering to booking API and caching headers for faster page loads
 - [x] **Bug Fix: Summer Bookings** - Extended booking date range from 3 months to 1 year ahead so July bookings now show as booked
+- [x] **Om Mig About Page** - New page at /om with Frederik's story explaining he's 14 years old and giving money to charity
+- [x] **Navigation Menu** - Added header with link to /om page
 
 ## Current Structure
 
 | File/Directory | Purpose | Status |
 |----------------|---------|--------|
 | `src/app/page.tsx` | Home page with booking flow | ✅ Complete |
+| `src/app/om/page.tsx` | About page with Frederik's story | ✅ Complete |
 | `src/app/admin/page.tsx` | Admin dashboard to view all bookings | ✅ Complete |
 | `src/app/api/bookings/route.ts` | API endpoint for saving/retrieving bookings | ✅ Complete |
 | `src/db/schema.ts` | Database schema for bookings | ✅ Complete |
