@@ -63,6 +63,8 @@ export default function Home() {
     address: "",
   });
   const [bookingComplete, setBookingComplete] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   // Fetch booked slots from database on mount - optimized with date filter
   useEffect(() => {
@@ -132,6 +134,12 @@ export default function Home() {
   };
 
   const handleDetailsSubmit = async (name: string, phone: string, address: string) => {
+    // Validate input
+    if (!name || !phone || !address) {
+      setAddressError("Alle felter skal udfyldes");
+      return;
+    }
+    
     // Smart address validation - detect if address is in Charlottenlund area
     const addressLower = address.toLowerCase();
     
@@ -181,6 +189,8 @@ export default function Home() {
     }
     
     setAddressError("");
+    setSubmitError("");
+    setIsSubmitting(true);
     
     // Save booking to API
     try {
@@ -201,15 +211,20 @@ export default function Home() {
       const result = await response.json();
       
       if (!response.ok) {
-        alert(result.error || "Der opstod en fejl. Prøv igen.");
+        setSubmitError(result.error || "Der opstod en fejl. Prøv igen.");
+        setIsSubmitting(false);
         return;
       }
       
       console.log("Booking gemt!", result);
     } catch (error) {
       console.error("Booking error:", error);
-      // Continue anyway - booking will still show on confirmation
+      setSubmitError("Der opstod en netværksfejl. Tjek din internetforbindelse og prøv igen.");
+      setIsSubmitting(false);
+      return;
     }
+    
+    setIsSubmitting(false);
     
     setBooking({ ...booking, name, phone, address });
     setBookingComplete(true);
@@ -628,11 +643,18 @@ export default function Home() {
                 </div>
               </div>
 
+              {submitError && (
+                <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-xl mb-4">
+                  {submitError}
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.02] transition-all"
+                disabled={isSubmitting}
+                className={`w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.02] transition-all ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                Bekræft Booking
+                {isSubmitting ? ' Booker...' : 'Bekræft Booking'}
               </button>
             </form>
           </div>
