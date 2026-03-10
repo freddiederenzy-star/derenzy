@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <nav className="bg-blue-600 text-white py-3 px-4">
           <div className="max-w-4xl mx-auto flex justify-between items-center">
-            <Link href="/" className="font-bold text-lg">🚗 Freddys Dækservice</Link>
+            <Link href="/" className="font-bold text-lg">🚗 Bilservice</Link>
             <Link href="/om" className="text-blue-100 hover:text-white transition-colors">
               Om mig
             </Link>
