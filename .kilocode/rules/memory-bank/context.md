@@ -29,6 +29,10 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Bug Fix: Summer Bookings** - Extended booking date range from 3 months to 1 year ahead so July bookings now show as booked
 - [x] **Om Mig About Page** - New page at /om with Frederik's story explaining he's 14 years old and giving money to charity
 - [x] **Navigation Menu** - Added header with link to /om page
+- [x] **Dark Theme Redesign** - Complete redesign with dark premium theme, floating navigation, and hero section
+- [x] **Service Name Update** - Changed from "Indvendig Rengøring" to "Indvendig Bilvaskning" with støvsugning og vaskning description
+- [x] **Pay After Option** - Added "Betales efter rengøring" note under the price
+- [x] **Hero Branding** - Added "Frederik's Bilvaskning" with animated gradient text in hero section
 
 ## Current Structure
 
@@ -46,7 +50,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 ## Current Focus
 
 Completed: Full car wash booking website with:
-- Service selection (Indvendig Rengøring)
+- Service selection (Indvendig Bilvaskning)
 - Date and time slot selection
 - Time slots: Blue = available, Gray/strikethrough = booked
 - Only Saturday and Sunday available (9:00 - 16:00)
