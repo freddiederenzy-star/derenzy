@@ -303,10 +303,6 @@ export default function Home() {
         {/* Step 1: Service Selection */}
         {step === 1 && (
           <div className="animate-fadeIn">
-            <h2 className="text-3xl font-bold text-white mb-2 text-center">
-              Bestil nu
-            </h2>
-            
             <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 mb-6 hover:border-cyan-500/30 transition-all group">
               <div className="flex justify-between items-center mb-4">
                 <div className="flex-1">
