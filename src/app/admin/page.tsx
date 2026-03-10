@@ -170,19 +170,19 @@ export default function AdminPage() {
                       </a>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-500">📍</span>
+                      <span className="text-gray-500">Adresse:</span>
                       <span className="text-gray-700">{booking.address}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-500">📅</span>
+                      <span className="text-gray-500">Dato:</span>
                       <span className="text-gray-700">{booking.date}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-500">⏰</span>
+                      <span className="text-gray-500">Tidspunkt:</span>
                       <span className="text-gray-700">kl. {booking.time}</span>
                     </div>
                     <div className="sm:col-span-2">
-                      <span className="text-gray-500">🧹 Service: </span>
+                      <span className="text-gray-500">Service: </span>
                       <span className="text-gray-700">{booking.service}</span>
                     </div>
                   </div>

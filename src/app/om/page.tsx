@@ -16,7 +16,7 @@ export default function Om() {
         {/* Profile Section */}
         <div className="text-center mb-12">
           <div className="w-32 h-32 bg-blue-200 rounded-full mx-auto mb-6 flex items-center justify-center">
-            <span className="text-6xl">🚗</span>
+            <span className="text-4xl text-blue-600">Frederik</span>
           </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Hej, jeg er Frederik!</h2>
           <p className="text-gray-600 text-lg">14 år</p>
@@ -37,7 +37,7 @@ export default function Om() {
 
         {/* Why I Do This */}
         <div className="bg-green-50 rounded-2xl p-8 mb-8 border-2 border-green-200">
-          <h3 className="text-xl font-bold text-green-800 mb-4">💚 Hvorfor gør jeg det her?</h3>
+          <h3 className="text-xl font-bold text-green-800 mb-4">Hvorfor gør jeg det her?</h3>
           <p className="text-green-700 leading-relaxed">
             Jeg tror på, at man aldrig er for ung til at gøre en forskel. Selvom jeg kun er 14 år, 
             vil jeg gerne vise, at unge mennesker kan bidrage til samfundet. En del af de penge, jeg tjener 

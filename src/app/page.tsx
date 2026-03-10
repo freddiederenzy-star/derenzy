@@ -241,25 +241,20 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-white/10">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <span className="text-white font-bold text-lg">Frederik&apos;s Bilvaskning</span>
+            <span className="text-white font-bold text-lg">Frederik Bilvaskning</span>
           </div>
           <div className="flex items-center gap-2">
             <a 
               href="/om" 
               className="text-xs bg-white/10 text-white/80 px-3 py-2 rounded-lg hover:bg-white/20 transition-all border border-white/10"
             >
-              ❤️ Om Mig
+              Om Mig
             </a>
             <a 
               href="/admin" 
               className="text-xs bg-white/10 text-white/80 px-3 py-2 rounded-lg hover:bg-white/20 transition-all border border-white/10"
             >
-              📋 Bookinger
+              Bookinger
             </a>
           </div>
         </div>
@@ -280,19 +275,10 @@ export default function Home() {
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Professionel indvendig bilvaskning med støvsugning og vaskning i hele bilen.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 text-slate-400">
-            <span className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              Premium kvalitet
-            </span>
-            <span className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd"/></svg>
-              Hurtig service
-            </span>
-            <span className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"/></svg>
-              Sikker betaling
-            </span>
+          <div className="flex flex-wrap justify-center gap-6 text-slate-400">
+            <span className="text-slate-300">Premium kvalitet</span>
+            <span className="text-slate-300">Hurtig service</span>
+            <span className="text-slate-300">Sikker betaling</span>
           </div>
         </div>
       </div>
@@ -313,24 +299,23 @@ export default function Home() {
               <div className="flex justify-between items-center mb-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-3xl">🚗</span>
                     <h3 className="text-xl font-bold text-white">
                       {services[0].name}
                     </h3>
                   </div>
                   <p className="text-slate-400 text-sm mb-4">{services[0].description}</p>
                   <div className="flex flex-wrap gap-2">
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🧹 Støvsugning</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🧼 Vaskning m. sæbe</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">💺 Sæder & Tæpper</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🔧 Plastdele</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🚪 Udvendig aftørring</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">Støvsugning</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">Vaskning med sæbe</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">Sæder og tæpper</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">Plastdele</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">Udvendig aftørring</span>
                   </div>
                 </div>
                 <div className="text-right ml-4">
                   <span className="text-3xl font-bold text-cyan-400">{services[0].price} kr.</span>
                   <p className="text-xs text-slate-500">{services[0].duration} min</p>
-                  <p className="text-xs text-green-400 mt-1 font-medium">💳 Betales efter med MobilePay</p>
+                  <p className="text-xs text-green-400 mt-1 font-medium">Betales efter med MobilePay</p>
                 </div>
               </div>
               <button
@@ -369,7 +354,7 @@ export default function Home() {
             {/* Date Picker */}
             <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 mb-6">
               <label className="block text-sm font-semibold text-white mb-3">
-                📅 Vælg Dato (Lørdag eller Søndag)
+                Vælg Dato (Lørdag eller Søndag)
               </label>
               
               <div className="flex gap-3">
@@ -451,7 +436,7 @@ export default function Home() {
             {booking.date && isValidWeekend(booking.date) && (
               <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 animate-fadeIn">
                 <label className="block text-sm font-semibold text-white mb-3">
-                  ⏰ Vælg Tidspunkt
+                  Vælg Tidspunkt
                 </label>
                 {loadingSlots ? (
                   <div className="text-center py-4 text-slate-400">
@@ -484,14 +469,8 @@ export default function Home() {
                   })}
                 </div>
                   <div className="mt-4 flex items-center gap-4 text-sm">
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-cyan-500 border border-cyan-500 rounded"></div>
-                      <span className="text-slate-400">Ledig</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-slate-600 border border-slate-500 rounded"></div>
-                      <span className="text-slate-500">Booket</span>
-                    </div>
+                    <span className="text-slate-400">Ledig</span>
+                    <span className="text-slate-500">Booket</span>
                   </div>
                 </>
                 )}
@@ -500,7 +479,7 @@ export default function Home() {
             {booking.date && !isValidWeekend(booking.date) && (
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-6 text-center">
                 <p className="text-yellow-400 font-medium">
-                  📅 Vi booker kun tid på lørdage og søndage
+                  Vi booker kun tid på lørdage og søndage
                 </p>
                 <p className="text-yellow-400/70 text-sm mt-1">
                   Vælg venligst en lørdag eller søndag ovenfor
