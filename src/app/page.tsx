@@ -36,7 +36,7 @@ const services: Service[] = [
   {
     id: "interior",
     name: "Indvendig Bilvaskning",
-    description: "Støvsugning med rigtig støvsuger. Vaskning med sæbe. Rensning af sæder og tæpper. Affedtning og rengøring af plastdele. Udvendig aftørring af døre og paneler. Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen!",
+    description: "Vi giver din bil en komplet indvendig rengøring! Vi støvsuger hele bilen grundigt med rigtig støvsuger - sæder, tæpper, bagagerum og alle kroge. Vasker alle indvendige flader med sæbe og rengøringsmidler. Renser og plejer sæder og tæpper for at fjerne pletter og give dem nyt liv. Affedter og rengør alle plastdele indvendigt - dashboard, dørpaneler, konsoller og mere. Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen!",
     price: 150,
     duration: 60,
   },
@@ -303,7 +303,7 @@ export default function Home() {
                       {services[0].name}
                     </h3>
                   </div>
-                  <p className="text-slate-400 text-sm mb-4">{services[0].description}</p>
+                  <p className="text-slate-400 text-base mb-4 leading-relaxed">{services[0].description}</p>
                   <div className="flex flex-col gap-2">
                     <div className="bg-cyan-500/20 text-cyan-300 px-3 py-2 rounded-lg border border-cyan-500/20">
                       <span className="font-semibold block text-xs uppercase tracking-wide">Støvsugning</span>
