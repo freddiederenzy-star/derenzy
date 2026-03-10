@@ -36,7 +36,7 @@ const services: Service[] = [
   {
     id: "interior",
     name: "Indvendig Bilvaskning",
-    description: "Komplet indvendig bilvaskning med støvsugning, vaskning og rensning - din bil bliver som ny!",
+    description: "Støvsugning indvendig - Vaskning med sæbe og vand - Rensning af sæder og tæpper - Affedtning af plastdele - Udvendig aftørring af døre og paneler. Udføres på adressen hvor bilen holder parkeret!",
     price: 150,
     duration: 60,
   },
