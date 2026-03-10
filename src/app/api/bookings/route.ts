@@ -84,6 +84,11 @@ export async function GET(request: Request) {
     const startDate = searchParams.get('startDate');
     const endDate = searchParams.get('endDate');
 
+    // Debug: log the database being used
+    const dbUrl = process.env.DATABASE_URL || "file:local.db";
+    console.log("=== FETCHING BOOKINGS ===");
+    console.log("Database URL:", dbUrl);
+
     // Get today's date to filter out old bookings
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -93,6 +98,8 @@ export async function GET(request: Request) {
       // Filter bookings within the date range
       const allBookings = await db.select().from(bookings)
         .orderBy(desc(bookings.createdAt));
+
+      console.log("Total bookings in DB:", allBookings.length);
 
       const filteredBookings = allBookings.filter(b =>
         b.date >= startDate && b.date <= endDate
@@ -108,6 +115,8 @@ export async function GET(request: Request) {
 
     // Default: Return all bookings (for admin purposes)
     const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
+    
+    console.log("Total bookings in DB:", allBookings.length);
 
     // Filter out bookings from past Saturdays (keep them in DB but don't show)
     // A booking is considered "past" if the date is before today
@@ -125,6 +134,6 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error("Error fetching bookings:", error);
     // Return empty array on error so the frontend doesn't crash
-    return NextResponse.json({ bookings: [], count: 0 });
+    return NextResponse.json({ bookings: [], count: 0, error: String(error) });
   }
 }
