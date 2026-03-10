@@ -36,6 +36,8 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Removed "Bestil nu" text** - Removed heading from service selection page
 - [x] **Turso Database** - Created cloud Turso database for production (file-based SQLite doesn't work on Vercel)
 - [x] **Migration Fix** - Updated migrate.ts to use DATABASE_URL environment variable
+- [x] **Blue Time Slots** - Changed available time slots to blue boxes for better visibility
+- [x] **Auto-Delete Past Bookings** - Bookings are automatically deleted from database when appointment time has passed (with 2 hour buffer)
 
 ## Current Structure
 
@@ -129,3 +131,4 @@ export async function GET() {
 | 2026-03-07 | Added dynamic time slots that fetch from database and show booked slots as gray |
 | 2026-03-09 | Updated price to 150kr |
 | 2026-03-10 | Updated price to 149kr and simplified booking text |
+| 2026-03-10 | Added blue time slots for available bookings and auto-delete past bookings |
