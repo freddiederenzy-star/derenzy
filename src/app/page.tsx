@@ -265,7 +265,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="pt-24 pb-12 px-4">
+      <div className="pt-12 pb-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-cyan-500/20 border border-cyan-500/30 rounded-full px-4 py-2 mb-6">
             <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
@@ -273,7 +273,7 @@ export default function Home() {
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 animate-gradient">
-              Bilvaskning
+              Frederik&apos;s Bilvaskning
             </span>
             <span className="block text-3xl md:text-4xl mt-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
               i verdensklasse
@@ -332,7 +332,7 @@ export default function Home() {
                 <div className="text-right ml-4">
                   <span className="text-3xl font-bold text-cyan-400">{services[0].price} kr.</span>
                   <p className="text-xs text-slate-500">{services[0].duration} min</p>
-                  <p className="text-xs text-green-400 mt-1 font-medium">💳 Betales efter rengøring</p>
+                  <p className="text-xs text-green-400 mt-1 font-medium">💳 Betales efter med MobilePay</p>
                 </div>
               </div>
               <button
@@ -676,9 +676,9 @@ export default function Home() {
 
               {/* Payment Section - MobilePay */}
               <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-6 mb-6 text-white shadow-lg shadow-green-500/25">
-                <h3 className="font-bold text-lg mb-2">💳 Betal med MobilePay</h3>
+                <h3 className="font-bold text-lg mb-2">💳 Betales efter med MobilePay</h3>
                 <p className="text-green-100 text-sm mb-4">
-                  Scan QR-koden eller send beløbet til:
+                  Betales efter rengøringen er udført. Scan QR-koden eller send beløbet til:
                 </p>
                 <div className="bg-white/20 backdrop-blur rounded-xl p-4 inline-block">
                   <p className="text-2xl font-bold text-white">+45 60 62 70 57</p>
