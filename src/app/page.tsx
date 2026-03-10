@@ -37,7 +37,7 @@ const services: Service[] = [
     id: "interior",
     name: "Indvendig Bilvaskning",
     description: "Vi giver din bil en komplet indvendig rengøring!",
-    price: 150,
+    price: 149,
     duration: 60,
   },
 ];
@@ -306,9 +306,6 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-white mb-2 text-center">
               Bestil nu
             </h2>
-            <p className="text-slate-400 text-center mb-8">
-              Vælg din service og book en tid
-            </p>
             
             <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 mb-6 hover:border-cyan-500/30 transition-all group">
               <div className="flex justify-between items-center mb-4">
