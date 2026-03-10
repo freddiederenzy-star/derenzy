@@ -36,7 +36,7 @@ const services: Service[] = [
   {
     id: "interior",
     name: "Indvendig Rengøring",
-    description: "Støvsugning og vask af bilens indvendige - sæder, gulvmåtter, instrumentpanel og ruder",
+    description: "Komplet indvendig rengøring med støvsugning, vask af sæder, instrumentpanel, måtter og ruder - din bil bliver som ny!",
     price: 150,
     duration: 60,
   },
@@ -249,25 +249,25 @@ export default function Home() {
                 </svg>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">🚗 Frederiks Bilvaskning</h1>
-                <p className="text-sm text-gray-500">✨ Din bil fortjener kærlighed!</p>
-                <p className="text-xs text-blue-600 font-medium mt-1">Kun støvsugning og vask af bilens indvendige</p>
+                <h1 className="text-2xl font-bold text-gray-900">✨ Frederik&apos;s Bilvaskning</h1>
+                <p className="text-sm text-gray-500">Din bil fortjener den bedste behandling!</p>
+                <p className="text-xs text-blue-600 font-medium mt-1">Professionel indvendig rengøring i Charlottenlund</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <a 
                 href="/om" 
-                className="text-xs bg-green-100 text-green-700 px-3 py-1.5 rounded-lg hover:bg-green-200 transition-colors font-medium"
+                className="text-xs bg-green-500 text-white px-3 py-2 rounded-lg hover:bg-green-600 transition-colors font-medium shadow-sm"
                 title="Læs om Frederik"
               >
                 ❤️ Om Mig
               </a>
               <a 
                 href="/admin" 
-                className="text-xs bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors font-medium"
+                className="text-xs bg-blue-50 text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-100 transition-colors font-medium"
                 title="Admin - Se alle bookinger"
               >
-                📋 Se Bookinger
+                📋 Bookinger
               </a>
             </div>
           </div>
@@ -316,10 +316,10 @@ export default function Home() {
         {step === 1 && (
           <div className="animate-fadeIn">
             <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-              🧽 Bestil Indvendig Rengøring
+              🚗 Bestil Indvendig Rengøring
             </h2>
             <p className="text-gray-600 text-center mb-8">
-              Giv din bil den behandling den fortjener! ✨
+              Vi giver din bil den behandling den fortjener! ✨
             </p>
             
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
@@ -329,6 +329,13 @@ export default function Home() {
                     {services[0].name}
                   </h3>
                   <p className="text-gray-600 text-sm">{services[0].description}</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">🧹 Støvsugning</span>
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">💺 Sæder</span>
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">🖥️ Instrumentpanel</span>
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">🪟 Ruder</span>
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">🧼 Måtter</span>
+                  </div>
                 </div>
                 <div className="text-right">
                   <span className="text-xl font-bold text-blue-600">{services[0].price} kr.</span>
