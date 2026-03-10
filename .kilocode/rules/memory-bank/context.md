@@ -33,6 +33,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Service Name Update** - Changed from "Indvendig Rengøring" to "Indvendig Bilvaskning" with støvsugning og vaskning description
 - [x] **Pay After Option** - Added "Betales efter rengøring" note under the price
 - [x] **Hero Branding** - Added "Frederik's Bilvaskning" with animated gradient text in hero section
+- [x] **Removed "Bestil nu" text** - Removed heading from service selection page
 
 ## Current Structure
 
