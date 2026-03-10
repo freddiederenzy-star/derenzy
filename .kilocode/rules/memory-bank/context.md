@@ -34,6 +34,8 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Pay After Option** - Added "Betales efter rengøring" note under the price
 - [x] **Hero Branding** - Added "Frederik's Bilvaskning" with animated gradient text in hero section
 - [x] **Removed "Bestil nu" text** - Removed heading from service selection page
+- [x] **Turso Database** - Created cloud Turso database for production (file-based SQLite doesn't work on Vercel)
+- [x] **Migration Fix** - Updated migrate.ts to use DATABASE_URL environment variable
 
 ## Current Structure
 
