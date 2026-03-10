@@ -41,8 +41,9 @@ export default function Om() {
           <h3 className="text-xl font-bold text-green-800 mb-4">💚 Hvorfor gør jeg det her?</h3>
           <p className="text-green-700 leading-relaxed">
             Jeg tror på, at man aldrig er for ung til at gøre en forskel. Selvom jeg kun er 14 år, 
-            vil jeg gerne vise, at unge mennesker kan bidrage til samfundet. Alle de penge, jeg tjener 
-            på at vaske biler, går til velgørenhed.
+            vil jeg gerne vise, at unge mennesker kan bidrage til samfundet. En del af de penge, jeg tjener 
+            på at vaske biler, går til <strong>velgørenhed</strong> - resten bruger jeg på materialer og udstyr 
+            så jeg kan fortsætte med at tilbyde denne service.
           </p>
         </div>
 

@@ -249,22 +249,27 @@ export default function Home() {
                 </svg>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">bilvask</h1>
-                <p className="text-sm text-gray-500">Professionel Bilpleje</p>
+                <h1 className="text-2xl font-bold text-gray-900">🚗 Frederiks Bilvaskning</h1>
+                <p className="text-sm text-gray-500">✨ Din bil fortjener kærlighed!</p>
                 <p className="text-xs text-blue-600 font-medium mt-1">Kun støvsugning og vask af bilens indvendige</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <span className="hidden sm:inline">📞</span>
-              <span className="hidden sm:inline">+45 60 62 70 57</span>
+            <div className="flex items-center gap-3">
+              <a 
+                href="/om" 
+                className="text-xs bg-green-100 text-green-700 px-3 py-1.5 rounded-lg hover:bg-green-200 transition-colors font-medium"
+                title="Læs om Frederik"
+              >
+                ❤️ Om Mig
+              </a>
+              <a 
+                href="/admin" 
+                className="text-xs bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors font-medium"
+                title="Admin - Se alle bookinger"
+              >
+                📋 Se Bookinger
+              </a>
             </div>
-            <a 
-              href="/admin" 
-              className="text-xs bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors font-medium"
-              title="Admin - Se alle bookinger"
-            >
-              📋 Se Bookinger
-            </a>
           </div>
         </div>
       </header>
@@ -311,10 +316,10 @@ export default function Home() {
         {step === 1 && (
           <div className="animate-fadeIn">
             <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-              Bestil Indvendig Rengøring
+              🧽 Bestil Indvendig Rengøring
             </h2>
             <p className="text-gray-600 text-center mb-8">
-              Støvsugning og vask af bilens indvendige
+              Giv din bil den behandling den fortjener! ✨
             </p>
             
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
