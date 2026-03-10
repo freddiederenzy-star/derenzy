@@ -236,117 +236,108 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-blue-100">
-        <div className="max-w-4xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v1a3 3 0 003 3v0a3 3 0 003-3v-1" />
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">✨ Frederik&apos;s Bilvaskning</h1>
-                <p className="text-sm text-gray-500">Din bil fortjener den bedste behandling!</p>
-                <p className="text-xs text-blue-600 font-medium mt-1">Professionel indvendig rengøring i Charlottenlund</p>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+      {/* Floating Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
             </div>
-            <div className="flex items-center gap-2">
-              <a 
-                href="/om" 
-                className="text-xs bg-green-500 text-white px-3 py-2 rounded-lg hover:bg-green-600 transition-colors font-medium shadow-sm"
-                title="Læs om Frederik"
-              >
-                ❤️ Om Mig
-              </a>
-              <a 
-                href="/admin" 
-                className="text-xs bg-blue-50 text-blue-600 px-3 py-2 rounded-lg hover:bg-blue-100 transition-colors font-medium"
-                title="Admin - Se alle bookinger"
-              >
-                📋 Bookinger
-              </a>
-            </div>
+            <span className="text-white font-bold text-lg">Frederik&apos;s</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <a 
+              href="/om" 
+              className="text-xs bg-white/10 text-white/80 px-3 py-2 rounded-lg hover:bg-white/20 transition-all border border-white/10"
+            >
+              ❤️ Om Mig
+            </a>
+            <a 
+              href="/admin" 
+              className="text-xs bg-white/10 text-white/80 px-3 py-2 rounded-lg hover:bg-white/20 transition-all border border-white/10"
+            >
+              📋 Bookinger
+            </a>
           </div>
         </div>
-      </header>
+      </nav>
 
-      {/* Progress Steps */}
-      <div className="bg-white border-b border-blue-100">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center justify-center gap-2 sm:gap-4">
-              {[1, 2, 3].map((s) => (
-                <div key={s} className="flex items-center">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
-                      step >= s
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200 text-gray-500"
-                    }`}
-                  >
-                    {s}
-                  </div>
-                  <span
-                    className={`ml-2 text-sm font-medium hidden sm:inline ${
-                      step >= s ? "text-blue-600" : "text-gray-400"
-                    }`}
-                  >
-                    {s === 1 ? "Tid" : s === 2 ? "Oplysninger" : "Bekræftelse"}
-                  </span>
-                  {s < 3 && (
-                    <div
-                      className={`w-8 sm:w-16 h-0.5 mx-2 ${
-                        step > s ? "bg-blue-500" : "bg-gray-200"
-                      }`}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
+      {/* Hero Section */}
+      <div className="pt-24 pb-12 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-cyan-500/20 border border-cyan-500/30 rounded-full px-4 py-2 mb-6">
+            <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
+            <span className="text-cyan-300 text-sm font-medium">Charlottenlund</span>
+          </div>
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+            Bilvaskning
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+              i verdensklasse
+            </span>
+          </h1>
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+            Professionel indvendig rengøring. Din bil fortjener den bedste behandling.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 text-slate-400">
+            <span className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              Premium kvalitet
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd"/></svg>
+              Hurtig service
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"/></svg>
+              Sikker betaling
+            </span>
           </div>
         </div>
       </div>
 
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      {/* Main Content */}
+      <main className="max-w-4xl mx-auto px-4 pb-12">
         {/* Step 1: Service Selection */}
         {step === 1 && (
           <div className="animate-fadeIn">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-              🚗 Bestil Indvendig Rengøring
+            <h2 className="text-3xl font-bold text-white mb-2 text-center">
+              Bestil nu
             </h2>
-            <p className="text-gray-600 text-center mb-8">
-              Vi giver din bil den behandling den fortjener! ✨
+            <p className="text-slate-400 text-center mb-8">
+              Vælg din service og book en tid
             </p>
             
-            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
+            <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 mb-6 hover:border-cyan-500/30 transition-all group">
               <div className="flex justify-between items-center mb-4">
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900">
-                    {services[0].name}
-                  </h3>
-                  <p className="text-gray-600 text-sm">{services[0].description}</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">🧹 Støvsugning</span>
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">💺 Sæder</span>
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">🖥️ Instrumentpanel</span>
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">🪟 Ruder</span>
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">🧼 Måtter</span>
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-3xl">🚗</span>
+                    <h3 className="text-xl font-bold text-white">
+                      {services[0].name}
+                    </h3>
+                  </div>
+                  <p className="text-slate-400 text-sm mb-4">{services[0].description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🧹 Støvsugning</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">💺 Sæder</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🖥️ Instrumentpanel</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🪟 Ruder</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🧼 Måtter</span>
                   </div>
                 </div>
-                <div className="text-right">
-                  <span className="text-xl font-bold text-blue-600">{services[0].price} kr.</span>
-                  <p className="text-xs text-gray-500">{services[0].duration} min</p>
+                <div className="text-right ml-4">
+                  <span className="text-3xl font-bold text-cyan-400">{services[0].price} kr.</span>
+                  <p className="text-xs text-slate-500">{services[0].duration} min</p>
                 </div>
               </div>
               <button
                 onClick={() => handleServiceSelect(services[0])}
-                className="w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:scale-[1.02] transition-all"
+                className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.02] transition-all"
               >
-                Vælg Tidspunkt
+                Vælg Tidspunkt →
               </button>
             </div>
           </div>
@@ -357,7 +348,7 @@ export default function Home() {
           <div className="animate-fadeIn">
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+              className="flex items-center gap-2 text-slate-400 hover:text-white mb-6 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -365,39 +356,35 @@ export default function Home() {
               Tilbage
             </button>
 
-            <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-              Vælg Din Tid
+            <h2 className="text-2xl font-bold text-white mb-2 text-center">
+              Vælg din tid
             </h2>
-            <p className="text-gray-600 text-center mb-8">
-              Vælg en tid til din indvendige rengøring
+            <p className="text-slate-400 text-center mb-8">
+              Vælg en tid der passer dig
             </p>
 
-            {/* Date Picker - Month/Day Only */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm mb-6">
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+            {/* Date Picker */}
+            <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 mb-6">
+              <label className="block text-sm font-semibold text-white mb-3">
                 📅 Vælg Dato (Lørdag eller Søndag)
               </label>
               
-              {/* Month and Day Selection */}
               <div className="flex gap-3">
-                {/* Month Select */}
                 <select
                   value={booking.date ? parseInt(booking.date.split('-')[1]) : ''}
                   onChange={(e) => {
                     const month = e.target.value;
                     if (!month) return;
                     
-                    // Get current year and find next valid weekend
                     const now = new Date();
                     let year = now.getFullYear();
                     let foundDate = null;
                     
-                    // Try to find a weekend day in selected month
                     for (let day = 1; day <= 31; day++) {
                       const testDate = new Date(year, parseInt(month) - 1, day);
                       if (testDate.getMonth() !== parseInt(month) - 1) break;
                       const dayOfWeek = testDate.getDay();
-                      if (dayOfWeek === 5 || dayOfWeek === 6) { // Saturday or Sunday
+                      if (dayOfWeek === 5 || dayOfWeek === 6) {
                         foundDate = testDate.toISOString().split('T')[0];
                         break;
                       }
@@ -407,7 +394,7 @@ export default function Home() {
                       setBooking({ ...booking, date: foundDate, time: "" });
                     }
                   }}
-                  className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="flex-1 px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all"
                 >
                   <option value="">Måned</option>
                   <option value="3">Marts</option>
@@ -422,7 +409,6 @@ export default function Home() {
                   <option value="12">December</option>
                 </select>
                 
-                {/* Day Select */}
                 <select
                   value={booking.date ? parseInt(booking.date.split('-')[2]) : ''}
                   onChange={(e) => {
@@ -432,7 +418,6 @@ export default function Home() {
                     const parts = booking.date.split('-');
                     const newDate = `${parts[0]}-${parts[1]}-${day.padStart(2, '0')}`;
                     
-                    // Verify it's a weekend
                     const selectedDate = new Date(newDate);
                     const dayOfWeek = selectedDate.getDay();
                     if (dayOfWeek !== 5 && dayOfWeek !== 6) {
@@ -442,7 +427,7 @@ export default function Home() {
                     
                     setBooking({ ...booking, date: newDate, time: "" });
                   }}
-                  className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="flex-1 px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all"
                   disabled={!booking.date}
                 >
                   <option value="">Dag</option>
@@ -453,7 +438,7 @@ export default function Home() {
               </div>
               
               {booking.date && (
-                <p className="text-green-600 text-sm mt-2 font-medium">
+                <p className="text-cyan-400 text-sm mt-2 font-medium">
                   ✅ Valgt: {new Date(booking.date).toLocaleDateString('da-DK', { weekday: 'long', day: 'numeric', month: 'long' })}
                 </p>
               )}
@@ -461,12 +446,12 @@ export default function Home() {
 
             {/* Time Slots */}
             {booking.date && isValidWeekend(booking.date) && (
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm animate-fadeIn">
-                <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 animate-fadeIn">
+                <label className="block text-sm font-semibold text-white mb-3">
                   ⏰ Vælg Tidspunkt
                 </label>
                 {loadingSlots ? (
-                  <div className="text-center py-4 text-gray-500">
+                  <div className="text-center py-4 text-slate-400">
                     <div className="animate-pulse">Henter bookinger...</div>
                   </div>
                 ) : (
@@ -484,10 +469,10 @@ export default function Home() {
                         }}
                         className={`py-3 px-2 rounded-xl text-sm font-medium transition-all ${
                           booked
-                            ? "bg-gray-300 text-gray-500 border border-gray-400 cursor-not-allowed"
+                            ? "bg-slate-700/50 text-slate-500 border border-slate-600 cursor-not-allowed"
                             : booking.time === time
-                            ? "bg-blue-600 text-white"
-                            : "bg-blue-500 text-white hover:bg-blue-600 border border-blue-500"
+                            ? "bg-cyan-500 text-white"
+                            : "bg-slate-700 text-white hover:bg-cyan-600 border border-slate-600 hover:border-cyan-500"
                         }`}
                       >
                         {booked ? <span className="line-through">{time}</span> : time}
@@ -497,12 +482,12 @@ export default function Home() {
                 </div>
                   <div className="mt-4 flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-blue-500 border border-blue-500 rounded"></div>
-                      <span className="text-gray-600">Ledig</span>
+                      <div className="w-4 h-4 bg-cyan-500 border border-cyan-500 rounded"></div>
+                      <span className="text-slate-400">Ledig</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 bg-gray-300 border border-gray-400 rounded"></div>
-                      <span className="text-gray-500">Booket</span>
+                      <div className="w-4 h-4 bg-slate-600 border border-slate-500 rounded"></div>
+                      <span className="text-slate-500">Booket</span>
                     </div>
                   </div>
                 </>
@@ -510,11 +495,11 @@ export default function Home() {
               </div>
             )}
             {booking.date && !isValidWeekend(booking.date) && (
-              <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-6 text-center">
-                <p className="text-yellow-800 font-medium">
+              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-6 text-center">
+                <p className="text-yellow-400 font-medium">
                   📅 Vi booker kun tid på lørdage og søndage
                 </p>
-                <p className="text-yellow-600 text-sm mt-1">
+                <p className="text-yellow-400/70 text-sm mt-1">
                   Vælg venligst en lørdag eller søndag ovenfor
                 </p>
               </div>
@@ -527,7 +512,7 @@ export default function Home() {
           <div className="animate-fadeIn">
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+              className="flex items-center gap-2 text-slate-400 hover:text-white mb-6 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -535,10 +520,10 @@ export default function Home() {
               Tilbage
             </button>
 
-            <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-              Dine Oplysninger
+            <h2 className="text-2xl font-bold text-white mb-2 text-center">
+              Dine oplysninger
             </h2>
-            <p className="text-gray-600 text-center mb-8">
+            <p className="text-slate-400 text-center mb-8">
               Udfyld dine kontaktoplysninger
             </p>
 
@@ -551,81 +536,81 @@ export default function Home() {
                 const address = (form.elements.namedItem("address") as HTMLInputElement).value;
                 handleDetailsSubmit(name, phone, address);
               }}
-              className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm"
+              className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10"
             >
               <div className="mb-4">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-white mb-2">
                   📛 Fuldt Navn
                 </label>
                 <input
                   type="text"
                   name="name"
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all placeholder-slate-400"
                   placeholder="F.eks. Anders And"
                 />
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-white mb-2">
                   📱 Telefonnummer
                 </label>
                 <input
                   type="tel"
                   name="phone"
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all placeholder-slate-400"
                   placeholder="+45 12 34 56 78"
                 />
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-white mb-2">
                   📍 Adresse (Charlottenlund)
                 </label>
                 <input
                   type="text"
                   name="address"
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all placeholder-slate-400"
                   placeholder="F.eks. Fortunevej 49, 2920 Charlottenlund"
                 />
                 {addressError && (
-                  <p className="text-red-500 text-sm mt-2">{addressError}</p>
+                  <p className="text-red-400 text-sm mt-2">{addressError}</p>
                 )}
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   Vi betjener kun adresser i Charlottenlund (2920)
                 </p>
               </div>
 
               {/* Booking Summary */}
-              <div className="bg-blue-50 rounded-xl p-4 mb-6">
-                <h3 className="font-semibold text-gray-900 mb-3">📋 Booking Oversigt</h3>
+              <div className="bg-slate-700/50 rounded-xl p-4 mb-6 border border-slate-600">
+                <h3 className="font-semibold text-white mb-3">📋 Booking Oversigt</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Service:</span>
-                    <span className="font-medium">{booking.service?.name}</span>
+                    <span className="text-slate-400">Service:</span>
+                    <span className="font-medium text-white">{booking.service?.name}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Dato:</span>
-                    <span className="font-medium">
+                    <span className="text-slate-400">Dato:</span>
+                    <span className="font-medium text-white">
                       {booking.date && new Date(booking.date).toLocaleDateString('da-DK', { weekday: 'long', day: 'numeric', month: 'long' })}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Tid:</span>
-                    <span className="font-medium">{booking.time}</span>
+                    <span className="text-slate-400">Tid:</span>
+                    <span className="font-medium text-white">{booking.time}</span>
                   </div>
-                  <div className="flex justify-between border-t border-blue-200 pt-2 mt-2">
-                    <span className="text-gray-600 font-semibold">Pris:</span>
-                    <span className="font-bold text-blue-600">{booking.service?.price} kr.</span>
+                  <div className="flex justify-between border-t border-slate-600 pt-2 mt-2">
+                    <span className="text-slate-400 font-semibold">Pris:</span>
+                    <span className="font-bold text-cyan-400">{booking.service?.price} kr.</span>
                   </div>
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:scale-[1.02] transition-all"
+                className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.02] transition-all"
               >
                 Bekræft Booking
               </button>
@@ -636,79 +621,79 @@ export default function Home() {
         {/* Step 4: Confirmation */}
         {step === 4 && bookingComplete && (
           <div className="animate-fadeIn">
-            <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-white/10 text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/25">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
 
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Tak for din booking! ✅
+              <h2 className="text-2xl font-bold text-white mb-2">
+                Tak for din booking! 🎉
               </h2>
-              <p className="text-gray-600 mb-8">
+              <p className="text-slate-400 mb-8">
                 Du vil modtage en bekræftelse på SMS
               </p>
 
               {/* Booking Details */}
-              <div className="bg-blue-50 rounded-xl p-6 mb-6 text-left">
-                <h3 className="font-semibold text-gray-900 mb-4">📋 Booking Detaljer</h3>
+              <div className="bg-slate-700/50 rounded-xl p-6 mb-6 text-left border border-slate-600">
+                <h3 className="font-semibold text-white mb-4">📋 Booking Detaljer</h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Navn:</span>
-                    <span className="font-medium">{booking.name}</span>
+                    <span className="text-slate-400">Navn:</span>
+                    <span className="font-medium text-white">{booking.name}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Telefon:</span>
-                    <span className="font-medium">{booking.phone}</span>
+                    <span className="text-slate-400">Telefon:</span>
+                    <span className="font-medium text-white">{booking.phone}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Adresse:</span>
-                    <span className="font-medium">{booking.address}</span>
+                    <span className="text-slate-400">Adresse:</span>
+                    <span className="font-medium text-white">{booking.address}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Service:</span>
-                    <span className="font-medium">{booking.service?.name}</span>
+                    <span className="text-slate-400">Service:</span>
+                    <span className="font-medium text-white">{booking.service?.name}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Dato:</span>
-                    <span className="font-medium">
+                    <span className="text-slate-400">Dato:</span>
+                    <span className="font-medium text-white">
                       {booking.date && new Date(booking.date).toLocaleDateString('da-DK', { weekday: 'long', day: 'numeric', month: 'long' })}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Tid:</span>
-                    <span className="font-medium">{booking.time}</span>
+                    <span className="text-slate-400">Tid:</span>
+                    <span className="font-medium text-white">{booking.time}</span>
                   </div>
-                  <div className="flex justify-between border-t border-blue-200 pt-3 mt-3">
-                    <span className="text-gray-600 font-semibold">Pris:</span>
-                    <span className="font-bold text-blue-600 text-lg">{booking.service?.price} kr.</span>
+                  <div className="flex justify-between border-t border-slate-600 pt-3 mt-3">
+                    <span className="text-slate-400 font-semibold">Pris:</span>
+                    <span className="font-bold text-cyan-400 text-lg">{booking.service?.price} kr.</span>
                   </div>
                 </div>
               </div>
 
               {/* Payment Section - MobilePay */}
-              <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 mb-6 text-white">
+              <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-6 mb-6 text-white shadow-lg shadow-green-500/25">
                 <h3 className="font-bold text-lg mb-2">💳 Betal med MobilePay</h3>
                 <p className="text-green-100 text-sm mb-4">
                   Scan QR-koden eller send beløbet til:
                 </p>
-                <div className="bg-white rounded-xl p-4 inline-block">
-                  <p className="text-2xl font-bold text-gray-900">+45 60 62 70 57</p>
+                <div className="bg-white/20 backdrop-blur rounded-xl p-4 inline-block">
+                  <p className="text-2xl font-bold text-white">+45 60 62 70 57</p>
                 </div>
                 <p className="text-green-100 text-sm mt-4">
                   Beløb: <span className="font-bold">{booking.service?.price} kr.</span>
                 </p>
-                <p className="text-green-100 text-xs mt-2">
+                <p className="text-green-100/70 text-xs mt-2">
                   Skriv dit telefonnummer i beskedfeltet
                 </p>
               </div>
 
               <button
                 onClick={handleReset}
-                className="w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+                className="w-full bg-slate-700 text-white py-3 rounded-xl font-medium hover:bg-slate-600 transition-colors border border-slate-600"
               >
-                Book another time
+                Book ny tid
               </button>
             </div>
           </div>
@@ -716,9 +701,9 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-100 mt-auto">
-        <div className="max-w-4xl mx-auto px-4 py-6 text-center text-sm text-gray-500">
-          <p>© 2024 bilvask - Professionel Bilpleje i Charlottenlund</p>
+      <footer className="bg-slate-900/50 border-t border-white/10 mt-auto">
+        <div className="max-w-4xl mx-auto px-4 py-6 text-center text-sm text-slate-500">
+          <p>© 2024 Frederik&apos;s Bilvaskning - Professionel Bilpleje i Charlottenlund</p>
           <p className="mt-1">Kontakt: +45 60 62 70 57</p>
         </div>
       </footer>
