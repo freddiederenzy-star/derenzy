@@ -25,6 +25,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **MobilePay Payment Section** - Prominent green payment section on confirmation page with phone number +45 60 62 70 57
 - [x] **Dynamic Time Slots** - Time slots now fetch from database and show booked slots as gray
 - [x] **Price Update** - Changed price from 99kr to 150kr
+- [x] **Performance Optimization** - Added date range filtering to booking API and caching headers for faster page loads
 
 ## Current Structure
 
