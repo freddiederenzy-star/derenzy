@@ -36,7 +36,7 @@ const services: Service[] = [
   {
     id: "interior",
     name: "Indvendig Bilvaskning",
-    description: "Komplet indvendig bilvaskning med støvsugning og vaskning i hele bilen - din bil bliver som ny!",
+    description: "Komplet indvendig bilvaskning med støvsugning, vaskning og rensning - din bil bliver som ny!",
     price: 150,
     duration: 60,
   },
@@ -246,6 +246,7 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
+            <span className="text-white font-bold text-lg">Frederik&apos;s Bilvaskning</span>
           </div>
           <div className="flex items-center gap-2">
             <a 
@@ -273,10 +274,7 @@ export default function Home() {
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 animate-gradient">
-              Frederik&apos;s Bilvaskning
-            </span>
-            <span className="block text-3xl md:text-4xl mt-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-              i verdensklasse
+              Bilvaskning i Verdensklasse
             </span>
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
@@ -323,10 +321,10 @@ export default function Home() {
                   <p className="text-slate-400 text-sm mb-4">{services[0].description}</p>
                   <div className="flex flex-wrap gap-2">
                     <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🧹 Støvsugning</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">💺 Sæder</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🖥️ Instrumentpanel</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🪟 Ruder</span>
-                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🧼 Måtter</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🧼 Vaskning m. sæbe</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">💺 Sæder & Tæpper</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🔧 Plastdele</span>
+                    <span className="text-xs bg-cyan-500/20 text-cyan-300 px-3 py-1.5 rounded-full border border-cyan-500/20">🚪 Udvendig aftørring</span>
                   </div>
                 </div>
                 <div className="text-right ml-4">
