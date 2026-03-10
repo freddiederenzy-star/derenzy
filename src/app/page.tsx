@@ -36,7 +36,7 @@ const services: Service[] = [
   {
     id: "interior",
     name: "Indvendig Bilvaskning",
-    description: "Støvsugning indvendigt. Vaskning med sæbe og vand. Rensning af sæder og tæpper. Affedtning af plastdele. Udvendig aftørring af døre og paneler. Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen!",
+    description: "Støvsugning med rigtig støvsuger. Vaskning med sæbe. Rensning af sæder og tæpper. Affedtning og rengøring af plastdele. Udvendig aftørring af døre og paneler. Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen!",
     price: 150,
     duration: 60,
   },
@@ -241,7 +241,7 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-white/10">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-white font-bold text-lg">Frederik Bilvaskning</span>
+            <span className="text-white font-bold text-lg">Frederik&apos;s Bilvaskning</span>
           </div>
           <div className="flex items-center gap-2">
             <a 
@@ -318,7 +318,7 @@ export default function Home() {
                 <div className="text-right ml-4">
                   <span className="text-3xl font-bold text-cyan-400">{services[0].price} kr.</span>
                   <p className="text-xs text-slate-500">{services[0].duration} min</p>
-                  <p className="text-xs text-green-400 mt-1 font-medium">Betales efter vask med MobilePay</p>
+                  <p className="text-xs text-green-400 mt-1 font-medium">Betales efter rengøring</p>
                 </div>
               </div>
               <button
