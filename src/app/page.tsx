@@ -35,8 +35,8 @@ type StoredBooking = {
 const services: Service[] = [
   {
     id: "interior",
-    name: "Indvendig Rengøring",
-    description: "Komplet indvendig rengøring med støvsugning, vask af sæder, instrumentpanel, måtter og ruder - din bil bliver som ny!",
+    name: "Indvendig Bilvaskning",
+    description: "Komplet indvendig bilvaskning med støvsugning og vaskning i hele bilen - din bil bliver som ny!",
     price: 150,
     duration: 60,
   },
@@ -273,13 +273,15 @@ export default function Home() {
             <span className="text-cyan-300 text-sm font-medium">Charlottenlund</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
-            Bilvaskning
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 animate-gradient">
+              Frederik&apos;s Bilvaskning 🚗
+            </span>
+            <span className="block text-3xl md:text-4xl mt-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
               i verdensklasse
             </span>
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Professionel indvendig rengøring. Din bil fortjener den bedste behandling.
+            Professionel indvendig bilvaskning med støvsugning og vaskning i hele bilen.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-slate-400">
             <span className="flex items-center gap-2">
@@ -331,6 +333,7 @@ export default function Home() {
                 <div className="text-right ml-4">
                   <span className="text-3xl font-bold text-cyan-400">{services[0].price} kr.</span>
                   <p className="text-xs text-slate-500">{services[0].duration} min</p>
+                  <p className="text-xs text-green-400 mt-1 font-medium">💳 Betales efter rengøring</p>
                 </div>
               </div>
               <button
