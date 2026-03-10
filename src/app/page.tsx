@@ -319,7 +319,7 @@ export default function Home() {
                     </li>
                     <li className="flex items-start gap-2 text-slate-300">
                       <span className="text-cyan-400 mt-1">✓</span>
-                      <span>Affedtning og dybderengøring af alle plastdele, instrumentpanel og dørpuder</span>
+                      <span>Dybrengøring og afviskning af alle plastdele, instrumentpanel og dørpuder</span>
                     </li>
                   </ul>
                   <div className="bg-green-500/20 text-green-300 px-4 py-3 rounded-xl border border-green-500/30 mb-4">
