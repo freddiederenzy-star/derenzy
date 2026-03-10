@@ -72,7 +72,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Booking error:", error);
     return NextResponse.json(
-      { error: "Der opstod en fejl ved booking" },
+      { error: "Der opstod en fejl ved booking", details: String(error) },
       { status: 500 }
     );
   }
