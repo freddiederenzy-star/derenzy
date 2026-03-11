@@ -89,7 +89,7 @@ export default function Home() {
         const bookings = Array.isArray(data) ? data : (data.bookings || []);
         if (bookings && Array.isArray(bookings)) {
           // Create bookedSlots array from database bookings
-          const slots = data.bookings.map(
+          const slots = bookings.map(
             (b: StoredBooking) => `${b.date}-${b.time}`
           );
           setBookedSlots(slots);
