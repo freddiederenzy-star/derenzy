@@ -7,12 +7,25 @@ import { desc, and, gte, lte, eq } from "drizzle-orm";
 // Cache control for faster subsequent loads
 const CACHE_CONTROL = "public, s-maxage=30, stale-while-revalidate=60";
 
+// Helper to check if we're in production (Vercel)
+const isProduction = process.env.VERCEL === "1";
+
 export async function POST(request: Request) {
   try {
     // Debug: log the database being used
     const dbUrl = process.env.DATABASE_URL || "file:local.db";
     console.log("=== NEW BOOKING REQUEST ===");
-    console.log("Database URL:", dbUrl);
+    console.log("Environment:", isProduction ? "production" : "development");
+    console.log("Database URL:", dbUrl.replace(/\?authToken=.*/, "?authToken=HIDDEN"));
+    
+    // Check if database is properly configured
+    if (isProduction && (!dbUrl || dbUrl === "file:local.db")) {
+      console.error("DATABASE_URL not properly configured for production!");
+      return NextResponse.json(
+        { error: "Database er ikke konfigureret. Kontakt venligst administrator." },
+        { status: 500 }
+      );
+    }
     
     const body = await request.json();
     const { service, date, time, name, phone, address, price } = body;
@@ -83,7 +96,7 @@ export async function POST(request: Request) {
     
     if (errorStr.includes("DATABASE_URL")) {
       errorMessage = "Database konfiguration fejler. Kontakt administrator.";
-    } else if (errorStr.includes("connect") || errorStr.includes("network")) {
+    } else if (errorStr.includes("connect") || errorStr.includes("network") || errorStr.includes("fetch")) {
       errorMessage = "Kan ikke forbinde til database. Prøv igen senere.";
     } else if (errorStr.includes("auth")) {
       errorMessage = "Database authentication fejler. Kontakt administrator.";
@@ -105,7 +118,7 @@ export async function GET(request: Request) {
     // Debug: log the database being used
     const dbUrl = process.env.DATABASE_URL || "file:local.db";
     console.log("=== FETCHING BOOKINGS ===");
-    console.log("Database URL:", dbUrl);
+    console.log("Database URL:", dbUrl.replace(/\?authToken=.*/, "?authToken=HIDDEN"));
 
     // Get today's date to filter out old bookings
     const now = new Date();
@@ -118,95 +131,47 @@ export async function GET(request: Request) {
 
     // Auto-delete bookings that have passed (both date AND time have passed)
     // Current time
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-    const currentTimeInMinutes = currentHour * 60 + currentMinute;
+    const currentTime = now.getHours() * 60 + now.getMinutes();
     
-    // Today's date string
-    const todayStr = today.toISOString().split('T')[0];
-
-    // Find and delete old bookings
-    const bookingsToDelete: number[] = [];
+    // Delete bookings where the appointment time has passed
+    // We need to compare both date AND time
     for (const booking of allBookings) {
-      // Compare date strings directly (YYYY-MM-DD format) to avoid timezone issues
-      const bookingDateStr = booking.date; // Already in YYYY-MM-DD format
+      const bookingDate = new Date(booking.date);
+      const bookingDateOnly = new Date(bookingDate.getFullYear(), bookingDate.getMonth(), bookingDate.getDate());
+      const todayDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
       
-      // Parse booking time
-      const [bookingHour, bookingMinute] = booking.time.split(':').map(Number);
-      const bookingTimeInMinutes = bookingHour * 60 + bookingMinute;
+      // Parse time (format: "10:00")
+      const [hours, minutes] = booking.time.split(':').map(Number);
+      const bookingTimeInMinutes = hours * 60 + minutes;
       
-      // If booking date is in the past, or if it's today and the time has passed (plus 2 hours buffer)
-      if (bookingDateStr < todayStr) {
-        // Past date - mark for deletion
-        bookingsToDelete.push(booking.id);
-      } else if (bookingDateStr === todayStr && currentTimeInMinutes > bookingTimeInMinutes + 120) {
-        // Today but time has passed (2 hour buffer after appointment)
-        bookingsToDelete.push(booking.id);
+      // Check if booking date is in the past
+      if (bookingDateOnly < todayDateOnly) {
+        // Date has passed, delete it
+        console.log(`Deleting old booking: ${booking.name} on ${booking.date} at ${booking.time}`);
+        await db.delete(bookings).where(eq(bookings.id, booking.id));
+      } else if (bookingDateOnly.getTime() === todayDateOnly.getTime()) {
+        // Same day - check if time has passed (with 2 hour buffer)
+        if (bookingTimeInMinutes < currentTime - 120) {
+          console.log(`Deleting today's expired booking: ${booking.name} at ${booking.time}`);
+          await db.delete(bookings).where(eq(bookings.id, booking.id));
+        }
       }
     }
 
-    // Delete old bookings
-    if (bookingsToDelete.length > 0) {
-      console.log(`Deleting ${bookingsToDelete.length} old booking(s):`, bookingsToDelete);
-      for (const id of bookingsToDelete) {
-        await db.delete(bookings).where(eq(bookings.id, id));
-      }
-    }
-
-    // If date range provided, filter by it (much faster)
-    if (startDate && endDate) {
-      // Re-fetch bookings after cleanup
-      const rangeBookings = await db.select().from(bookings)
-        .orderBy(desc(bookings.createdAt));
-
-      console.log("Total bookings in DB after cleanup:", rangeBookings.length);
-
-      const filteredBookings = rangeBookings.filter(b =>
-        b.date >= startDate && b.date <= endDate
-      );
-
-      const response = NextResponse.json({
-        bookings: filteredBookings,
-        count: filteredBookings.length
-      });
-      response.headers.set('Cache-Control', CACHE_CONTROL);
-      return response;
-    }
-
-    // Default: Return all bookings (for admin purposes) - re-fetch after cleanup
-    const validBookingsList = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
+    // Get bookings again after cleanup
+    const filteredBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
     
-    console.log("Total bookings in DB after cleanup:", validBookingsList.length);
-
-    // Filter out bookings from past Saturdays (keep them in DB but don't show)
-    // A booking is considered "past" if the date is before today
-    const validBookings = validBookingsList.filter(b => {
-      const bookingDate = new Date(b.date);
-      return bookingDate >= today;
+    // Return with cache headers
+    return NextResponse.json(filteredBookings, {
+      headers: {
+        'Cache-Control': CACHE_CONTROL,
+      },
     });
-
-    const response = NextResponse.json({
-      bookings: validBookings,
-      count: validBookings.length
-    });
-    response.headers.set('Cache-Control', CACHE_CONTROL);
-    return response;
   } catch (error) {
     console.error("Error fetching bookings:", error);
-    const errorStr = String(error);
-    
-    // Provide more specific error messages
-    let errorMessage = "Der opstod en fejl ved hentning af bookinger";
-    
-    if (errorStr.includes("DATABASE_URL")) {
-      errorMessage = "Database konfiguration fejler. Kontakt administrator.";
-    } else if (errorStr.includes("connect") || errorStr.includes("network")) {
-      errorMessage = "Kan ikke forbinde til database. Prøv igen senere.";
-    } else if (errorStr.includes("auth")) {
-      errorMessage = "Database authentication fejler. Kontakt administrator.";
-    }
-    
-    // Return empty array on error so the frontend doesn't crash
-    return NextResponse.json({ bookings: [], count: 0, error: errorMessage });
+    return NextResponse.json(
+      { error: "Kunne ikke hente bookinger", details: String(error) },
+      { status: 500 }
+    );
   }
 }
