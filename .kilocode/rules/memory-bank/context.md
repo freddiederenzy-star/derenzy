@@ -41,6 +41,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Build Fix** - Fixed missing GET function declaration in bookings API that was causing deployment errors
 - [x] **Database URL Logging** - Added debug logging to show which database is being used
 - [x] **Drizzle Config** - Updated drizzle.config.ts to use DATABASE_URL environment variable
+- [x] **Local SQLite Database** - Switched to local SQLite because Turso requires auth token
 
 ## Current Structure
 
@@ -57,7 +58,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 
 ## Current Focus
 
-Completed: Full car wash booking website with:
+**Database Issue**: Turso cloud database requires authentication token. The placeholder token doesn't work. Using local SQLite (file:local.db) for now. User needs to get their auth token from Turso dashboard to use cloud database.
 - Service selection (Indvendig Bilvaskning)
 - Date and time slot selection
 - Time slots: Blue = available, Gray/strikethrough = booked
