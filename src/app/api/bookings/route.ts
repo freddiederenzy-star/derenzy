@@ -9,6 +9,11 @@ const CACHE_CONTROL = "public, s-maxage=30, stale-while-revalidate=60";
 
 export async function POST(request: Request) {
   try {
+    // Debug: log the database being used
+    const dbUrl = process.env.DATABASE_URL || "file:local.db";
+    console.log("=== NEW BOOKING REQUEST ===");
+    console.log("Database URL:", dbUrl);
+    
     const body = await request.json();
     const { service, date, time, name, phone, address, price } = body;
 
@@ -77,8 +82,6 @@ export async function POST(request: Request) {
     );
   }
 }
-
-export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const startDate = searchParams.get('startDate');
