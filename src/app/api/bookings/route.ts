@@ -115,18 +115,18 @@ export async function GET(request: Request) {
     // Find and delete old bookings
     const bookingsToDelete: number[] = [];
     for (const booking of allBookings) {
-      const bookingDate = new Date(booking.date);
-      const bookingDateOnly = bookingDate.toISOString().split('T')[0];
+      // Compare date strings directly (YYYY-MM-DD format) to avoid timezone issues
+      const bookingDateStr = booking.date; // Already in YYYY-MM-DD format
       
       // Parse booking time
       const [bookingHour, bookingMinute] = booking.time.split(':').map(Number);
       const bookingTimeInMinutes = bookingHour * 60 + bookingMinute;
       
       // If booking date is in the past, or if it's today and the time has passed (plus 2 hours buffer)
-      if (bookingDateOnly < todayStr) {
+      if (bookingDateStr < todayStr) {
         // Past date - mark for deletion
         bookingsToDelete.push(booking.id);
-      } else if (bookingDateOnly === todayStr && currentTimeInMinutes > bookingTimeInMinutes + 120) {
+      } else if (bookingDateStr === todayStr && currentTimeInMinutes > bookingTimeInMinutes + 120) {
         // Today but time has passed (2 hour buffer after appointment)
         bookingsToDelete.push(booking.id);
       }
