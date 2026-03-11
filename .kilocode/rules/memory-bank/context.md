@@ -38,6 +38,9 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Migration Fix** - Updated migrate.ts to use DATABASE_URL environment variable
 - [x] **Blue Time Slots** - Changed available time slots to blue boxes for better visibility
 - [x] **Auto-Delete Past Bookings** - Bookings are automatically deleted from database when appointment time has passed (with 2 hour buffer)
+- [x] **Build Fix** - Fixed missing GET function declaration in bookings API that was causing deployment errors
+- [x] **Database URL Logging** - Added debug logging to show which database is being used
+- [x] **Drizzle Config** - Updated drizzle.config.ts to use DATABASE_URL environment variable
 
 ## Current Structure
 
