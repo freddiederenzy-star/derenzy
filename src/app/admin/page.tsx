@@ -43,9 +43,10 @@ export default function AdminPage() {
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch("/api/bookings");
-      const data = await response.json();
-      setBookings(data.bookings || []);
+      const data = await fetch("/api/bookings").then(res => res.json());
+      // API returns array directly, not { bookings: [...] }
+      const bookingsList = Array.isArray(data) ? data : (data.bookings || []);
+      setBookings(bookingsList);
     } catch (error) {
       console.error("Error fetching bookings:", error);
     } finally {
