@@ -76,8 +76,21 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Booking error:", error);
+    
+    // Provide more specific error messages
+    let errorMessage = "Der opstod en fejl ved booking";
+    const errorStr = String(error);
+    
+    if (errorStr.includes("DATABASE_URL")) {
+      errorMessage = "Database konfiguration fejler. Kontakt administrator.";
+    } else if (errorStr.includes("connect") || errorStr.includes("network")) {
+      errorMessage = "Kan ikke forbinde til database. Prøv igen senere.";
+    } else if (errorStr.includes("auth")) {
+      errorMessage = "Database authentication fejler. Kontakt administrator.";
+    }
+    
     return NextResponse.json(
-      { error: "Der opstod en fejl ved booking", details: String(error) },
+      { error: errorMessage, details: errorStr },
       { status: 500 }
     );
   }
@@ -180,7 +193,20 @@ export async function GET(request: Request) {
     return response;
   } catch (error) {
     console.error("Error fetching bookings:", error);
+    const errorStr = String(error);
+    
+    // Provide more specific error messages
+    let errorMessage = "Der opstod en fejl ved hentning af bookinger";
+    
+    if (errorStr.includes("DATABASE_URL")) {
+      errorMessage = "Database konfiguration fejler. Kontakt administrator.";
+    } else if (errorStr.includes("connect") || errorStr.includes("network")) {
+      errorMessage = "Kan ikke forbinde til database. Prøv igen senere.";
+    } else if (errorStr.includes("auth")) {
+      errorMessage = "Database authentication fejler. Kontakt administrator.";
+    }
+    
     // Return empty array on error so the frontend doesn't crash
-    return NextResponse.json({ bookings: [], count: 0, error: String(error) });
+    return NextResponse.json({ bookings: [], count: 0, error: errorMessage });
   }
 }
