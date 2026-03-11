@@ -42,6 +42,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Database URL Logging** - Added debug logging to show which database is being used
 - [x] **Drizzle Config** - Updated drizzle.config.ts to use DATABASE_URL environment variable
 - [x] **Local SQLite Database** - Switched to local SQLite because Turso requires auth token
+- [x] **Timezone Bug Fix** - Fixed auto-delete old bookings to compare date strings directly instead of using Date objects with timezone issues
 
 ## Current Structure
 
