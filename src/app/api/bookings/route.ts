@@ -175,3 +175,33 @@ export async function GET(request: Request) {
     );
   }
 }
+
+// DELETE endpoint to remove a booking by ID
+export async function DELETE(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+    
+    if (!id) {
+      return NextResponse.json(
+        { error: "Booking ID er påkrævet" },
+        { status: 400 }
+      );
+    }
+    
+    const bookingId = parseInt(id);
+    
+    // Delete the booking
+    await db.delete(bookings).where(eq(bookings.id, bookingId));
+    
+    console.log(`Booking ${bookingId} deleted`);
+    
+    return NextResponse.json({ success: true, message: "Booking slettet" });
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+    return NextResponse.json(
+      { error: "Kunne ikke slette booking", details: String(error) },
+      { status: 500 }
+    );
+  }
+}
