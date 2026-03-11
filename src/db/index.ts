@@ -1,3 +1,6 @@
+// Build timestamp for debugging deployment issues
+console.log("Build time:", new Date().toISOString());
+
 import { drizzle } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client";
 import * as schema from "./schema";
