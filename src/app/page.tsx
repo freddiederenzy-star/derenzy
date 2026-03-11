@@ -77,7 +77,17 @@ export default function Home() {
         
         const response = await fetch(`/api/bookings?startDate=${startDate}&endDate=${endDate}`);
         const data = await response.json();
-        if (data.bookings && Array.isArray(data.bookings)) {
+        
+        // Handle error responses
+        if (!response.ok) {
+          console.error("API Error:", data.error || data);
+          setBookedSlots([]);
+          return;
+        }
+        
+        // API returns array directly, not { bookings: [...] }
+        const bookings = Array.isArray(data) ? data : (data.bookings || []);
+        if (bookings && Array.isArray(bookings)) {
           // Create bookedSlots array from database bookings
           const slots = data.bookings.map(
             (b: StoredBooking) => `${b.date}-${b.time}`
@@ -99,7 +109,17 @@ export default function Home() {
       // Fetch all bookings (no date filter) to ensure we catch all booked slots
       const response = await fetch("/api/bookings");
       const data = await response.json();
-      if (data.bookings && Array.isArray(data.bookings)) {
+      
+      // Handle error responses
+      if (!response.ok) {
+        console.error("API Error:", data.error || data);
+        setBookedSlots([]);
+        return;
+      }
+      
+      // API returns array directly, not { bookings: [...] }
+      const bookings = Array.isArray(data) ? data : (data.bookings || []);
+      if (bookings && Array.isArray(bookings)) {
         // Create bookedSlots array from database bookings
         const slots = data.bookings.map(
           (b: StoredBooking) => `${b.date}-${b.time}`
@@ -219,7 +239,8 @@ export default function Home() {
       console.log("Booking gemt!", result);
     } catch (error) {
       console.error("Booking error:", error);
-      setSubmitError("Der opstod en netværksfejl. Tjek din internetforbindelse og prøv igen.");
+      // Show more helpful error message
+      setSubmitError("Der opstod en fejl. Prøv igen om et øjeblik. Hvis problemet fortsætter, kontakt os telefonisk.");
       setIsSubmitting(false);
       return;
     }
