@@ -35,8 +35,8 @@ export default function Om() {
             Jeg bruger tid på at gøre det godt, ikke hurtigt.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            En del af pengene går til <strong>velgørenhed</strong>, og resten tjener jeg selv. 
-            På den måde hjælper jeg både dig og andre!
+            En del af pengene går til <strong>produkter</strong> så jeg kan blive ved med at gøre dette, 
+            og selvfølgelig går der også noget til mig selv. På den måde kan jeg fortsætte med at udvikle mig!
           </p>
         </div>
 
