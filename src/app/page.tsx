@@ -147,11 +147,11 @@ export default function Home() {
     return bookedSlots.includes(`${date}-${time}`);
   };
 
-  // Check if selected date is Saturday (5) or Sunday (6)
+  // Check if selected date is Saturday (6) or Sunday (0)
   const isValidWeekend = (date: string): boolean => {
     if (!date) return false;
     const day = new Date(date).getDay();
-    return day === 5 || day === 6; // Saturday = 5, Sunday = 6
+    return day === 0 || day === 6; // Sunday = 0, Saturday = 6
   };
 
   const handleDetailsSubmit = async (name: string, phone: string, address: string) => {
@@ -475,18 +475,12 @@ export default function Home() {
                     const selectedDay = parseInt(day);
                     
                     const selectedDate = new Date(year, month, selectedDay);
-                    const now = new Date();
-                    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                    
-                    // Check if date is in the past
-                    if (selectedDate < today) {
-                      alert("Du kan ikke booke dage i fortiden. Vælg en dato fra i dag eller frem.");
-                      return;
-                    }
-                    
                     const dayOfWeek = selectedDate.getDay();
+                    
+                    // Check if it's Saturday (6) or Sunday (0)
                     if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-                      alert("Vi booker kun tid på lørdage og søndage. Vælg venligst en weekenddag.");
+                      const dayNames = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'];
+                      alert(`${dayNames[dayOfWeek]} den ${selectedDay} er ikke en lørdag eller søndag. Vælg venligst en weekenddag.`);
                       return;
                     }
                     
