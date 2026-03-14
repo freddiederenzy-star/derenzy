@@ -336,6 +336,10 @@ export default function Home() {
                   <ul className="space-y-2 mb-4">
                     <li className="flex items-start gap-2 text-slate-300">
                       <span className="text-cyan-400 mt-1">✓</span>
+                      <span>Vi bruger Stjärnagloss Inni til interiørrens af hele kabinen</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-slate-300">
+                      <span className="text-cyan-400 mt-1">✓</span>
                       <span>Grundig støvsugning af hele bilen indvendig - sæder, tæpper og bagagerum</span>
                     </li>
                     <li className="flex items-start gap-2 text-slate-300">

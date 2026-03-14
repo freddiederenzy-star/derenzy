@@ -46,6 +46,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Price Update** - Changed price from 149kr to 125kr, duration from 60min to 50min
 - [x] **Text Update** - Changed "Professionel" to "Grundig støvning af mig Frederik"
 - [x] **Equipment Note** - Added note that we have all cleaning supplies, customer only needs a vacuum cleaner
+- [x] **Product Info** - Added Stjärnagloss Inni to service description
 
 ## Current Structure
 
