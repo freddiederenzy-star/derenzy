@@ -326,59 +326,65 @@ export default function Home() {
         {step === 1 && (
           <div className="animate-fadeIn">
             <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 mb-6 hover:border-cyan-500/30 transition-all group">
-              <div className="flex gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-xl font-bold text-white">
-                      {services[0].name}
-                    </h3>
-                  </div>
-                  <p className="text-slate-400 text-lg mb-4 leading-relaxed">{services[0].description}</p>
-                  <ul className="space-y-2 mb-4">
-                    <li className="flex items-start gap-3 text-slate-300">
-                      <span className="text-cyan-400 mt-1">✓</span>
-                      <span className="flex items-center gap-3">
-                        Vi bruger Stjärnagloss Inni til interiørrens af hele kabinen
-                        <span className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden bg-white ml-2">
-                          <Image 
-                            src="https://www.cadetailing.co.uk/cdn/shop/files/AnyConv.com__INNI_GUN_1296x_7f8397f1-bbc3-4cfe-b37a-c3d91a1966f3.webp?v=1742904250&width=1600"
-                            alt="Stjärnagloss Inni"
-                            fill
-                            className="object-contain"
-                          />
-                        </span>
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2 text-slate-300">
-                      <span className="text-cyan-400 mt-1">✓</span>
-                      <span>Grundig støvsugning af hele bilen indvendig - sæder, tæpper og bagagerum</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-slate-300">
-                      <span className="text-cyan-400 mt-1">✓</span>
-                      <span>Komplet vaskning af alle indvendige flader med sæbe og specialrengøring</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-slate-300">
-                      <span className="text-cyan-400 mt-1">✓</span>
-                      <span>Grundig støvning af mig Frederik og pletfjerning af sæder, tæpper og polstring</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-slate-300">
-                      <span className="text-cyan-400 mt-1">✓</span>
-                      <span>Dybrengøring og afviskning af alle plastdele, instrumentpanel og dørpuder</span>
-                    </li>
-                  </ul>
-                  <div className="bg-green-500/20 text-green-300 px-4 py-3 rounded-xl border border-green-500/30">
-                    <span className="font-semibold text-base">Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen! Vi har alle vaskemidlerne klar - du skal kun have en støvsuger klar.</span>
-                  </div>
+              <div className="mb-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-2xl font-bold text-white">
+                    {services[0].name}
+                  </h3>
                 </div>
-                <div className="text-right flex-shrink-0">
-                  <span className="text-3xl font-bold text-cyan-400">{services[0].price} kr.</span>
-                  <p className="text-xs text-slate-500">{services[0].duration} min</p>
-                  <p className="text-xs text-green-400 mt-1 font-medium">Betales efter rengøring</p>
+                <p className="text-slate-400 text-lg mb-6 leading-relaxed">{services[0].description}</p>
+                
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center gap-3 text-slate-300">
+                    <span className="text-cyan-400 text-xl">✓</span>
+                    <span className="flex items-center gap-3">
+                      Vi bruger Stjärnagloss Inni til interiørrens af hele kabinen
+                      <span className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden bg-white ml-2 shadow-lg">
+                        <Image 
+                          src="https://www.cadetailing.co.uk/cdn/shop/files/AnyConv.com__INNI_GUN_1296x_7f8397f1-bbc3-4cfe-b37a-c3d91a1966f3.webp?v=1742904250&width=1600"
+                          alt="Stjärnagloss Inni"
+                          fill
+                          className="object-contain"
+                        />
+                      </span>
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-3 text-slate-300">
+                    <span className="text-cyan-400 text-xl">✓</span>
+                    <span>Grundig støvsugning af hele bilen indvendig - sæder, tæpper og bagagerum</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-slate-300">
+                    <span className="text-cyan-400 text-xl">✓</span>
+                    <span>Komplet vaskning af alle indvendige flader med sæbe og specialrengøring</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-slate-300">
+                    <span className="text-cyan-400 text-xl">✓</span>
+                    <span>Grundig støvning af mig Frederik og pletfjerning af sæder, tæpper og polstring</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-slate-300">
+                    <span className="text-cyan-400 text-xl">✓</span>
+                    <span>Dybrengøring og afviskning af alle plastdele, instrumentpanel og dørpuder</span>
+                  </li>
+                </ul>
+                
+                <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-300 px-5 py-4 rounded-xl border border-green-500/30 mb-6">
+                  <span className="font-semibold text-base">Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen! Vi har alle vaskemidlerne klar - du skal kun have en støvsuger klar.</span>
                 </div>
               </div>
+              
+              <div className="flex items-end justify-between">
+                <div>
+                  <span className="text-4xl font-bold text-cyan-400">{services[0].price} kr.</span>
+                  <p className="text-sm text-slate-500 mt-1">{services[0].duration} min</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-green-400 font-medium mb-3">💳 Betales efter rengøring</p>
+                </div>
+              </div>
+              
               <button
                 onClick={() => handleServiceSelect(services[0])}
-                className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.02] transition-all"
+                className="w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 bg-[length:200%_100%] animate-gradient text-white py-5 rounded-xl font-bold text-xl hover:shadow-xl hover:shadow-cyan-500/30 hover:scale-[1.02] transition-all mt-4"
               >
                 Vælg Tidspunkt →
               </button>
