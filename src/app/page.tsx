@@ -326,7 +326,15 @@ export default function Home() {
         {step === 1 && (
           <div className="animate-fadeIn">
             <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-6 border border-white/10 mb-6 hover:border-cyan-500/30 transition-all group">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex gap-6">
+                <div className="relative w-40 h-40 flex-shrink-0 rounded-xl overflow-hidden bg-white">
+                  <Image 
+                    src="https://www.cadetailing.co.uk/cdn/shop/files/AnyConv.com__INNI_GUN_1296x_7f8397f1-bbc3-4cfe-b37a-c3d91a1966f3.webp?v=1742904250&width=1600"
+                    alt="Stjärnagloss Inni - Interiørrens"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <h3 className="text-xl font-bold text-white">
@@ -356,19 +364,11 @@ export default function Home() {
                       <span>Dybrengøring og afviskning af alle plastdele, instrumentpanel og dørpuder</span>
                     </li>
                   </ul>
-                  <div className="relative w-full h-48 mb-4 rounded-xl overflow-hidden">
-                    <Image 
-                      src="https://www.cadetailing.co.uk/cdn/shop/files/AnyConv.com__INNI_GUN_1296x_7f8397f1-bbc3-4cfe-b37a-c3d91a1966f3.webp?v=1742904250&width=1600"
-                      alt="Stjärnagloss Inni - Interiørrens"
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  <div className="bg-green-500/20 text-green-300 px-4 py-3 rounded-xl border border-green-500/30 mb-4">
+                  <div className="bg-green-500/20 text-green-300 px-4 py-3 rounded-xl border border-green-500/30">
                     <span className="font-semibold text-base">Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen! Vi har alle vaskemidlerne klar - du skal kun have en støvsuger klar.</span>
                   </div>
                 </div>
-                <div className="text-right ml-4">
+                <div className="text-right flex-shrink-0">
                   <span className="text-3xl font-bold text-cyan-400">{services[0].price} kr.</span>
                   <p className="text-xs text-slate-500">{services[0].duration} min</p>
                   <p className="text-xs text-green-400 mt-1 font-medium">Betales efter rengøring</p>
