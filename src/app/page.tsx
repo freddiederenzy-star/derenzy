@@ -427,7 +427,7 @@ export default function Home() {
                     
                     const now = new Date();
                     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                    let year = now.getFullYear();
+                    const year = now.getFullYear();
                     let foundDate = null;
                     
                     for (let day = 1; day <= 31; day++) {
@@ -437,7 +437,7 @@ export default function Home() {
                       if (testDate < today) continue;
                       const dayOfWeek = testDate.getDay();
                       if (dayOfWeek === 0 || dayOfWeek === 6) {
-                        foundDate = testDate.toISOString().split('T')[0];
+                        foundDate = `${year}-${month.padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
                         break;
                       }
                     }
@@ -470,9 +470,11 @@ export default function Home() {
                     if (!day || !booking.date) return;
                     
                     const parts = booking.date.split('-');
-                    const newDate = `${parts[0]}-${parts[1]}-${day.padStart(2, '0')}`;
+                    const year = parseInt(parts[0]);
+                    const month = parseInt(parts[1]) - 1;
+                    const selectedDay = parseInt(day);
                     
-                    const selectedDate = new Date(newDate);
+                    const selectedDate = new Date(year, month, selectedDay);
                     const now = new Date();
                     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
                     
@@ -488,6 +490,7 @@ export default function Home() {
                       return;
                     }
                     
+                    const newDate = `${year}-${parts[1]}-${day.padStart(2, '0')}`;
                     setBooking({ ...booking, date: newDate, time: "" });
                   }}
                   className="flex-1 px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all"
