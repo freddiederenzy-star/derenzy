@@ -47,6 +47,7 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Text Update** - Changed "Professionel" to "Grundig støvning af mig Frederik"
 - [x] **Equipment Note** - Added note that we have all cleaning supplies, customer only needs a vacuum cleaner
 - [x] **Product Info** - Added Stjärnagloss Inni to service description
+- [x] **Product Image** - Added Stjärnagloss Inni product image to the page
 
 ## Current Structure
 

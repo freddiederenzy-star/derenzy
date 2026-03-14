@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 type Service = {
   id: string;
@@ -355,6 +356,14 @@ export default function Home() {
                       <span>Dybrengøring og afviskning af alle plastdele, instrumentpanel og dørpuder</span>
                     </li>
                   </ul>
+                  <div className="relative w-full h-48 mb-4 rounded-xl overflow-hidden">
+                    <Image 
+                      src="https://www.cadetailing.co.uk/cdn/shop/files/AnyConv.com__INNI_GUN_1296x_7f8397f1-bbc3-4cfe-b37a-c3d91a1966f3.webp?v=1742904250&width=1600"
+                      alt="Stjärnagloss Inni - Interiørrens"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                   <div className="bg-green-500/20 text-green-300 px-4 py-3 rounded-xl border border-green-500/30 mb-4">
                     <span className="font-semibold text-base">Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen! Vi har alle vaskemidlerne klar - du skal kun have en støvsuger klar.</span>
                   </div>
