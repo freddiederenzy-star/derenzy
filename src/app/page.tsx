@@ -349,12 +349,6 @@ export default function Home() {
                       </span>
                     </span>
                   </li>
-                  <li className="text-slate-300">
-                    Grundig støvsugning af hele bilen indvendig - sæder, tæpper og bagagerum
-                  </li>
-                  <li className="text-slate-300">
-                    Komplet vaskning af alle indvendige flader med sæbe og specialrengøring
-                  </li>
                   <li className="flex items-center gap-3 text-slate-300">
                     <span className="text-cyan-400 text-xl">✓</span>
                     <span>Grundig indvendig rengøring af mig Frederik - inklusiv støvsugning, vask og pletfjerning af sæder, tæpper og polstring</span>
