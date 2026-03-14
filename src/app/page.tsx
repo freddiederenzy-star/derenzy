@@ -310,7 +310,7 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Grundig støvning af mig Frederik indvendig bilvaskning med støvsugning og vaskning i hele bilen.
+            Grundig indvendig bilvaskning med støvsugning og vaskning i hele bilen - udført af mig, Frederik.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-slate-400">
             <span className="text-slate-300">Premium kvalitet</span>
@@ -359,7 +359,7 @@ export default function Home() {
                   </li>
                   <li className="flex items-center gap-3 text-slate-300">
                     <span className="text-cyan-400 text-xl">✓</span>
-                    <span>Grundig støvning af mig Frederik og pletfjerning af sæder, tæpper og polstring</span>
+                    <span>Grundig indvendig rengøring af mig Frederik - inklusiv støvsugning, vask og pletfjerning af sæder, tæpper og polstring</span>
                   </li>
                   <li className="flex items-center gap-3 text-slate-300">
                     <span className="text-cyan-400 text-xl">✓</span>
