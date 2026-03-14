@@ -352,7 +352,7 @@ export default function Home() {
                     </li>
                   </ul>
                   <div className="bg-green-500/20 text-green-300 px-4 py-3 rounded-xl border border-green-500/30 mb-4">
-                    <span className="font-semibold text-base">Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen!</span>
+                    <span className="font-semibold text-base">Hele arbejdet udføres på adressen hvor bilen holder parkeret - du behøver ikke køre nogen steder hen! Vi har alle vaskemidlerne klar - du skal kun have en støvsuger klar.</span>
                   </div>
                 </div>
                 <div className="text-right ml-4">
