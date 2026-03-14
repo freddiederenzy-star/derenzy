@@ -43,6 +43,8 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] **Drizzle Config** - Updated drizzle.config.ts to use DATABASE_URL environment variable
 - [x] **Local SQLite Database** - Switched to local SQLite because Turso requires auth token
 - [x] **Timezone Bug Fix** - Fixed auto-delete old bookings to compare date strings directly instead of using Date objects with timezone issues
+- [x] **Price Update** - Changed price from 149kr to 125kr, duration from 60min to 50min
+- [x] **Text Update** - Changed "Professionel" to "Grundig støvning af mig Frederik"
 
 ## Current Structure
 
@@ -137,3 +139,4 @@ export async function GET() {
 | 2026-03-09 | Updated price to 150kr |
 | 2026-03-10 | Updated price to 149kr and simplified booking text |
 | 2026-03-10 | Added blue time slots for available bookings and auto-delete past bookings |
+| 2026-03-14 | Updated price to 125kr, duration to 50min, changed "Professionel" to "Grundig støvning af mig Frederik"

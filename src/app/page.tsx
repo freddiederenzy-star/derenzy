@@ -37,8 +37,8 @@ const services: Service[] = [
     id: "interior",
     name: "Indvendig Bilvaskning",
     description: "Vi giver din bil en komplet indvendig rengøring!",
-    price: 149,
-    duration: 60,
+    price: 125,
+    duration: 50,
   },
 ];
 
@@ -309,7 +309,7 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Professionel indvendig bilvaskning med støvsugning og vaskning i hele bilen.
+            Grundig støvning af mig Frederik indvendig bilvaskning med støvsugning og vaskning i hele bilen.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-slate-400">
             <span className="text-slate-300">Premium kvalitet</span>
@@ -344,7 +344,7 @@ export default function Home() {
                     </li>
                     <li className="flex items-start gap-2 text-slate-300">
                       <span className="text-cyan-400 mt-1">✓</span>
-                      <span>Professionel rensning og pletfjerning af sæder, tæpper og polstring</span>
+                      <span>Grundig støvning af mig Frederik og pletfjerning af sæder, tæpper og polstring</span>
                     </li>
                     <li className="flex items-start gap-2 text-slate-300">
                       <span className="text-cyan-400 mt-1">✓</span>
@@ -759,7 +759,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-slate-900/50 border-t border-white/10 mt-auto">
         <div className="max-w-4xl mx-auto px-4 py-6 text-center text-sm text-slate-500">
-          <p>© 2024 Frederik&apos;s Bilvaskning - Professionel Bilpleje i Charlottenlund</p>
+          <p>© 2024 Frederik&apos;s Bilvaskning - Grundig Bilpleje i Charlottenlund</p>
           <p className="mt-1">Kontakt: +45 60 62 70 57</p>
         </div>
       </footer>
