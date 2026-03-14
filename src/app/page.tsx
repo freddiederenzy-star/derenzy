@@ -38,7 +38,7 @@ const services: Service[] = [
     id: "interior",
     name: "Indvendig Bilvaskning",
     description: "Vi giver din bil en komplet indvendig rengøring!",
-    price: 125,
+    price: 150,
     duration: 50,
   },
 ];
@@ -349,13 +349,11 @@ export default function Home() {
                       </span>
                     </span>
                   </li>
-                  <li className="flex items-center gap-3 text-slate-300">
-                    <span className="text-cyan-400 text-xl">✓</span>
-                    <span>Grundig støvsugning af hele bilen indvendig - sæder, tæpper og bagagerum</span>
+                  <li className="text-slate-300">
+                    Grundig støvsugning af hele bilen indvendig - sæder, tæpper og bagagerum
                   </li>
-                  <li className="flex items-center gap-3 text-slate-300">
-                    <span className="text-cyan-400 text-xl">✓</span>
-                    <span>Komplet vaskning af alle indvendige flader med sæbe og specialrengøring</span>
+                  <li className="text-slate-300">
+                    Komplet vaskning af alle indvendige flader med sæbe og specialrengøring
                   </li>
                   <li className="flex items-center gap-3 text-slate-300">
                     <span className="text-cyan-400 text-xl">✓</span>
@@ -444,7 +442,7 @@ export default function Home() {
                       // Skip dates in the past
                       if (testDate < today) continue;
                       const dayOfWeek = testDate.getDay();
-                      if (dayOfWeek === 5 || dayOfWeek === 6) {
+                      if (dayOfWeek === 0 || dayOfWeek === 6) {
                         foundDate = testDate.toISOString().split('T')[0];
                         break;
                       }
@@ -491,7 +489,7 @@ export default function Home() {
                     }
                     
                     const dayOfWeek = selectedDate.getDay();
-                    if (dayOfWeek !== 5 && dayOfWeek !== 6) {
+                    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
                       alert("Vi booker kun tid på lørdage og søndage. Vælg venligst en weekenddag.");
                       return;
                     }
