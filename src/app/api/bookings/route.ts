@@ -124,7 +124,42 @@ export async function GET(request: Request) {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    // Get all bookings
+    // Get all bookings first
+    const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
+    
+    console.log("Total bookings in DB:", allBookings.length);
+
+    // Auto-delete bookings that have passed (both date AND time have passed)
+    // Current time
+    const now = new Date();
+    const currentTime = now.getHours() * 60 + now.getMinutes();
+    
+    // Delete bookings where the appointment time has passed
+    // We need to compare both date AND time
+    for (const booking of allBookings) {
+      const bookingDate = new Date(booking.date);
+      const bookingDateOnly = new Date(bookingDate.getFullYear(), bookingDate.getMonth(), bookingDate.getDate());
+      const todayDateOnly = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      
+      // Parse time (format: "10:00")
+      const [hours, minutes] = booking.time.split(':').map(Number);
+      const bookingTimeInMinutes = hours * 60 + minutes;
+      
+      // Check if booking date is in the past
+      if (bookingDateOnly < todayDateOnly) {
+        // Date has passed, delete it
+        console.log(`Deleting old booking: ${booking.name} on ${booking.date} at ${booking.time}`);
+        await db.delete(bookings).where(eq(bookings.id, booking.id));
+      } else if (bookingDateOnly.getTime() === todayDateOnly.getTime()) {
+        // Same day - check if time has passed (with 2 hour buffer)
+        if (bookingTimeInMinutes < currentTime - 120) {
+          console.log(`Deleting today's expired booking: ${booking.name} at ${booking.time}`);
+          await db.delete(bookings).where(eq(bookings.id, booking.id));
+        }
+      }
+    }
+
+    // Get bookings again after cleanup
     const filteredBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
     
     // Return with cache headers
