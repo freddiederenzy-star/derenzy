@@ -131,7 +131,6 @@ export async function GET(request: Request) {
 
     // Auto-delete bookings that have passed (both date AND time have passed)
     // Current time
-    const now = new Date();
     const currentTime = now.getHours() * 60 + now.getMinutes();
     
     // Delete bookings where the appointment time has passed
